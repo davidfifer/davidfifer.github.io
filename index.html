@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Fifer • Backend Engineer</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 120px 20px 80px;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    .btn-group a {
+      display: inline-block;
+      margin: 8px;
+      padding: 12px 22px;
+      background: white;
+      color: #1e3c72;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn-group a:hover {
+      background: #e6e6e6;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    /* Tech Grid */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 15px;
+    }
+
+    .tech-item {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    /* Project Cards */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+    }
+
+    .project-card a {
+      color: #1e3c72;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #1e3c72;
+      color: white;
+      margin-top: 80px;
+    }
+
+    footer a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO SECTION -->
+  <header>
+    <h1>David Fifer</h1>
+    <p>Backend Engineer specializing in distributed systems, automation, developer tooling, and high‑reliability backend services.</p>
+
+    <div class="btn-group">
+      <a href="https://github.com/yourusername">GitHub</a>
+      <a href="https://linkedin.com/in/yourprofile">LinkedIn</a>
+      <a href="resume.pdf">Resume</a>
+    </div>
+  </header>
+
+  <!-- TECH STACK -->
+  <section id="tech">
+    <h2>Tech Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">Python</div>
+      <div class="tech-item">Java</div>
+      <div class="tech-item">Ruby</div>
+      <div class="tech-item">SQL</div>
+      <div class="tech-item">AWS</div>
+      <div class="tech-item">Terraform</div>
+      <div class="tech-item">Docker</div>
+      <div class="tech-item">Kubernetes</div>
+      <div class="tech-item">CI/CD</div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section id="projects">
+    <h2>Featured Projects</h2>
+
+    <div class="projects">
+
+      <div class="project-card">
+        <h3>Distributed Job Scheduler</h3>
+        <p>A fault‑tolerant scheduler built with Python + Redis Streams. Supports retries, backoff, and horizontal scaling.</p>
+        <a href="#">View Project →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Java Microservice Template</h3>
+        <p>Production‑ready Spring Boot template with metrics, tracing, health checks, and Dockerized deployment.</p>
+        <a href="#">View Project →</a>
+      </div>
+
+      <div class="project-card">
+        <h3>Ruby Automation Toolkit</h3>
+        <p>CLI tools for log parsing, batch processing, and developer workflow automation.</p>
+        <a href="#">View Project →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE DIAGRAMS -->
+  <section id="architecture">
+    <h2>Architecture Diagrams</h2>
+    <p>System designs, data flows, and infrastructure diagrams from backend and distributed systems projects.</p>
+
+    <ul>
+      <li><a href="assets/diagrams/scheduler-architecture.png">Distributed Scheduler Architecture</a></li>
+      <li><a href="assets/diagrams/microservice-flow.png">Java Microservice Request Flow</a></li>
+      <li><a href="assets/diagrams/terraform-infra.png">Terraform Infrastructure Layout</a></li>
+    </ul>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I'm a backend engineer based in Kansas City with deep experience in distributed systems, backend services, automation, and developer tooling.  
+      I’ve spent my career building reliable, scalable systems at Oracle and Cerner, with a focus on performance, observability, and developer experience.
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 David Fifer</p>
+    <p>
+      <a href="mailto:you@example.com">Email</a> •
+      <a href="https://linkedin.com/in/yourprofile">LinkedIn</a> •
+      <a href="https://github.com/yourusername">GitHub</a>
+    </p>
+  </footer>
+
+</body>
+</html>

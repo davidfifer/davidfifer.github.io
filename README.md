@@ -1,72 +1,41 @@
-# GitHub Pages Architecture — davidfifer.github.io
+# Site Flow — davidfifer.github.io
 
-davidfifer.github.io/                     ← Public portfolio website
-│
-├── index.html                            ← Homepage (hero, skills, projects)
-├── assets/
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-├── projects/                             ← Project cards link OUT to repos
-│
-└── (links to external repos)
-      │
-      ├── davidfifer-portfolio/           ← Curated portfolio hub
-      │     ├── python/
-      │     ├── java/
-      │     ├── ruby/
-      │     └── docs/
-      │
-      ├── python-file-organizer/          ← Standalone Python repo
-      │     ├── src/
-      │     └── tests/
-      │
-      ├── java-distributed-scheduler/     ← Java backend system
-      │     ├── src/
-      │     └── config/
-      │
-      └── ruby-cli-utils/                 ← Ruby automation tools
-            ├── bin/
-            └── lib/
+## Homepage
+- Hero Section  
+  - Name, title, summary  
+  - Call‑to‑action buttons (GitHub, LinkedIn, Resume)
 
-# David Fifer — Portfolio Website
+- Skills / Tech Stack  
+  - Python, Java, Ruby  
+  - AWS, Terraform, Docker, Kubernetes  
+  - CI/CD, Distributed Systems
 
-Welcome to the source code for my personal portfolio site, hosted at **davidfifer.github.io**.  
-This site highlights my work in backend engineering, distributed systems, automation, and developer tooling.  
-It serves as a clean, fast, and accessible entry point for recruiters, hiring managers, and collaborators.
+- Featured Projects  
+  - **Python Project Card**  
+    - Summary  
+    - Tech stack  
+    - "View Code" → links to repo  
+  - **Java Project Card**  
+    - Summary  
+    - Architecture diagram thumbnail  
+    - "View Code" → links to repo  
+  - **Ruby Project Card**  
+    - Summary  
+    - "View Code" → links to repo  
 
----
+- Architecture Diagrams  
+  - System diagrams  
+  - Data flows  
+  - Infrastructure layouts  
+  - Each diagram links to a full‑size version
 
-## 📁 Sitemap
+- About Section  
+  - Background (Oracle, Cerner)  
+  - Backend engineering focus  
+  - Distributed systems + automation
 
-davidfifer.github.io/
-│
-├── index.html                        ← Main homepage
-│
-├── assets/                           ← Static assets
-│   ├── css/
-│   │   ├── main.css
-│   │   └── theme.css
-│   ├── js/
-│   │   ├── main.js
-│   │   └── animations.js
-│   └── images/
-│       ├── headshot.jpg
-│       ├── project-thumbnails/
-│       └── diagrams/
-│
-├── projects/                         ← Optional deep‑dive project pages
-│   ├── python-file-organizer.html
-│   ├── java-scheduler-service.html
-│   └── ruby-cli-utils.html
-│
-├── diagrams/                         ← Architecture diagrams
-│   ├── scheduler-architecture.png
-│   ├── pipeline-flow.png
-│   └── microservice-layout.png
-│
-├── resume/
-│   └── david-fifer-resume.pdf        ← Downloadable resume
-│
-└── sitemap.xml                       ← SEO sitemap (optional)
+- Contact Section  
+  - Email  
+  - LinkedIn  
+  - GitHub  
+  - Resume

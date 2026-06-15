@@ -34,12 +34,17 @@
     <section class="section">
       <h2>Key Features</h2>
       <ul class="feature-list">
-        <li><strong>Extension sorting:</strong> Automatically groups files by type.</li>
-        <li><strong>Date sorting:</strong> Organizes files into year/month folders.</li>
-        <li><strong>Dry‑run mode:</strong> Shows actions without modifying anything.</li>
-        <li><strong>Config‑driven:</strong> Supports custom file‑type mappings.</li>
-        <li><strong>Logging:</strong> Detailed logs for every operation.</li>
-        <li><strong>File locking:</strong> Skips locked files safely.</li>
+        <li><strong>Sort by Extension:</strong> Group files into subfolders based on their file type.</li>
+        <li><strong>Sort by Modified Date:</strong> Organize files into date‑named folders (YYYY‑MM‑DD).</li>
+        <li><strong>Dry‑run Mode:</strong> Preview all actions without modifying the filesystem.</li>
+        <li><strong>Clean CLI Interface:</strong> Supports <code>--folder_path</code>, <code>--sort_mode</code>, and <code>--verbose</code> flags.</li>
+        <li><strong>Verbose Logging:</strong> Adjustable log levels for detailed operational insight.</li>
+        <li><strong>Config‑Driven Behavior:</strong> File‑type mappings and dry‑run mode defined in <code>config.json</code>.</li>
+        <li><strong>Automatic Directory Creation:</strong> Creates destination folders on demand.</li>
+        <li><strong>File‑Lock Detection:</strong> Detects locked files and retries with configurable backoff.</li>
+        <li><strong>Retry Logic:</strong> Automatically retries locked or unavailable files with delay handling.</li>
+        <li><strong>Graceful Error Handling:</strong> Logs warnings without interrupting the process.</li>
+        <li><strong>Cross‑Platform File Lock Detection:</strong> Uses <code>msvcrt</code> on Windows and <code>fcntl</code> on Unix systems.</li>
       </ul>
     </section>
 

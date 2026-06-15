@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>File Organizer – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+
+<body>
+  <header>
+    <a href="../index.html" class="back-link">← Back to portfolio</a>
+    <h1>File Organizer</h1>
+    <p class="subtitle">
+      A configurable Python utility that organizes files by extension or last‑modified date,
+      with dry‑run mode, logging, and cross‑platform file‑locking support.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Overview</h2>
+      <p>
+        The File Organizer scans a target directory and sorts files into structured subfolders
+        based on either their file extension or their last‑modified timestamp. It supports
+        configuration files, verbose logging, dry‑run mode, and safe handling of locked files.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Extension sorting:</strong> Automatically groups files by type.</li>
+        <li><strong>Date sorting:</strong> Organizes files into year/month folders.</li>
+        <li><strong>Dry‑run mode:</strong> Shows actions without modifying anything.</li>
+        <li><strong>Config‑driven:</strong> Supports custom file‑type mappings.</li>
+        <li><strong>Logging:</strong> Detailed logs for every operation.</li>
+        <li><strong>File locking:</strong> Skips locked files safely.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Repository</h2>
+      <p>The full source code is available on GitHub:</p>
+      <p>
+        <a href="https://github.com/davidfifer/file_organizer" target="_blank" rel="noopener">
+          View the GitHub repository →
+        </a>
+      </p>
+    </section>
+
+    <section>
+      <h2>How It Works</h2>
+      <p>
+        The tool walks the directory tree, identifies supported file types, and moves files into
+        destination folders based on the selected mode. It uses Python’s <code>os</code>,
+        <code>shutil</code>, and <code>logging</code> modules, along with a configuration loader
+        for custom rules.
+      </p>
+    </section>
+
+    <section>
+      <h2>Example Usage</h2>
+      <pre><code>python file_organizer.py --path "C:/Downloads" --mode extension --dry-run</code></pre>
+      <pre><code>python file_organizer.py --path "/Users/david/Documents" --mode date --verbose</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 David Fifer</p>
+  </footer>
+</body>
+</html>

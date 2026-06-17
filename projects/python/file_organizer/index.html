@@ -1,15 +1,122 @@
-<div class="project-card">
-  <h3>File Organizer</h3>
-  <p>
-    A Python utility that organizes files by extension or modified date, with dry‑run mode,
-    config‑driven behavior, and cross‑platform file‑lock detection.
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python Projects | David Fifer</title>
 
-  <div class="tags">
-    <span class="tag">Python</span>
-    <span class="tag">CLI</span>
-    <span class="tag">Automation</span>
-  </div>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #222;
+        }
 
-  <a href="file-organizer.html" class="btn small">View Details</a>
-</div>
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: #1e293b;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+
+        header p {
+            margin-top: 10px;
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        .projects-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            margin-top: 0;
+            font-size: 22px;
+            color: #0f172a;
+        }
+
+        .project-card p {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .project-card a {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 8px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Python Projects</h1>
+    <p>A curated collection of Python tools, automation scripts, and engineering projects.</p>
+</header>
+
+<br><a href="../../../index.html">← Back to Home</a>
+
+<section class="projects-container">
+
+    <div class="project-card">
+      <h3>File Organizer</h3>
+      <p>
+        A cross‑platform Python utility that automatically organizes files in a directory
+        by extension or last‑modified date.
+      </p>
+      <ul>
+        <li><strong>Tech:</strong> Python, Logging, ConfigParser, CLI</li>
+      </ul>
+
+      <a href="file-organizer.html" class="btn">
+        View project details
+      </a>
+    </div>
+
+    <!-- Add more project cards as needed -->
+
+</section>
+
+<footer>
+    © 2026 David Fifer — Python Engineering Portfolio
+</footer>
+
+</body>
+</html>

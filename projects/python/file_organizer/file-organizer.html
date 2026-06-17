@@ -11,47 +11,132 @@
 
   <header class="project-header">
     <a href="./" class="back-link">← Back to Project Overview</a>
-
     <h1 class="project-title">File Organizer</h1>
-
-    <!-- <p class="subtitle">
-      A configurable Python utility that organizes files by extension or last‑modified date,
-      with dry‑run mode, logging, and cross‑platform file‑locking support.
-    </p> -->
   </header>
 
   <main class="project-content">
 
+    <!-- Overview -->
     <section class="section">
       <h2>Overview</h2>
       <p>
-        The File Organizer scans a target directory and sorts files into structured subfolders
-        based on either their file extension or their last‑modified timestamp. It supports
-        configuration files, verbose logging, dry‑run mode, and safe handling of locked files.
+        File Organizer is a cross‑platform Python utility designed to bring structure to
+        cluttered directories. It scans a target folder, classifies files by extension or
+        last‑modified date, and moves them into clean, predictable subfolders. The tool
+        emphasizes safety, configurability, and operational transparency through dry‑run
+        mode, verbose logging, and resilient file‑locking detection.
       </p>
     </section>
 
+    <!-- Architecture -->
+    <section class="section">
+      <h2>Architecture & Design</h2>
+      <p>
+        The project follows a modular architecture that separates scanning, classification,
+        movement, logging, and configuration into distinct components. This makes the tool
+        easy to extend (e.g., adding new sort modes or cloud‑sync behavior).
+      </p>
+
+      <ul class="feature-list">
+        <li><strong>Scanner Module:</strong> Walks the directory tree and collects file metadata.</li>
+        <li><strong>Classifier:</strong> Determines destination folders based on extension or timestamp.</li>
+        <li><strong>Executor:</strong> Moves files, respecting dry‑run mode and retry logic.</li>
+        <li><strong>Logger:</strong> Provides structured logs with adjustable verbosity.</li>
+        <li><strong>Config Loader:</strong> Reads <code>config.json</code> to customize behavior.</li>
+      </ul>
+
+      <p>
+        This separation of concerns ensures the tool remains maintainable and testable as it grows.
+      </p>
+    </section>
+
+    <!-- Key Features -->
     <section class="section">
       <h2>Key Features</h2>
       <ul class="feature-list">
-        <li><strong>Sort by Extension:</strong> Group files into subfolders based on their file type.</li>
-        <li><strong>Sort by Modified Date:</strong> Organize files into date‑named folders (YYYY‑MM‑DD).</li>
-        <li><strong>Dry‑run Mode:</strong> Preview all actions without modifying the filesystem.</li>
-        <li><strong>Clean CLI Interface:</strong> Supports <code>--folder_path</code>, <code>--sort_mode</code>, and <code>--verbose</code> flags.</li>
-        <li><strong>Verbose Logging:</strong> Adjustable log levels for detailed operational insight.</li>
-        <li><strong>Config‑Driven Behavior:</strong> File‑type mappings and dry‑run mode defined in <code>config.json</code>.</li>
+        <li><strong>Sort by Extension:</strong> Groups files into subfolders based on file type.</li>
+        <li><strong>Sort by Modified Date:</strong> Organizes files into <code>YYYY‑MM‑DD</code> folders.</li>
+        <li><strong>Dry‑run Mode:</strong> Shows all planned actions without touching the filesystem.</li>
+        <li><strong>Verbose Logging:</strong> Multiple log levels for debugging or quiet operation.</li>
+        <li><strong>Config‑Driven Behavior:</strong> File‑type mappings and flags defined in <code>config.json</code>.</li>
         <li><strong>Automatic Directory Creation:</strong> Creates destination folders on demand.</li>
-        <li><strong>File‑Lock Detection:</strong> Detects locked files and retries with configurable backoff.</li>
-        <li><strong>Retry Logic:</strong> Automatically retries locked or unavailable files with delay handling.</li>
+        <li><strong>Cross‑Platform File‑Lock Detection:</strong> Uses <code>msvcrt</code> (Windows) and <code>fcntl</code> (Unix).</li>
+        <li><strong>Retry Logic:</strong> Retries locked or unavailable files with exponential backoff.</li>
         <li><strong>Graceful Error Handling:</strong> Logs warnings without interrupting the process.</li>
-        <li><strong>Cross‑Platform File Lock Detection:</strong> Uses <code>msvcrt</code> on Windows and <code>fcntl</code> on Unix systems.</li>
       </ul>
     </section>
 
+    <!-- Usage Examples -->
+    <section class="section">
+      <h2>Usage Examples</h2>
+
+      <h3>Basic Sorting</h3>
+      <pre><code>python file_organizer.py --folder_path "C:/Downloads"</code></pre>
+
+      <h3>Sort by Modified Date</h3>
+      <pre><code>python file_organizer.py --folder_path "./data" --sort_mode date</code></pre>
+
+      <h3>Dry‑run Mode</h3>
+      <pre><code>python file_organizer.py --folder_path "./incoming" --dry_run</code></pre>
+
+      <h3>Verbose Logging</h3>
+      <pre><code>python file_organizer.py --folder_path "./docs" --verbose</code></pre>
+    </section>
+
+    <!-- Config -->
+    <section class="section">
+      <h2>Configuration</h2>
+      <p>
+        The tool reads a <code>config.json</code> file that defines file‑type mappings,
+        dry‑run defaults, and retry behavior. This allows users to tailor the organizer to
+        their workflow without modifying code.
+      </p>
+
+      <pre><code>{
+  "dry_run": false,
+  "retry_delay": 1.0,
+  "max_retries": 3,
+  "extension_map": {
+    "images": ["jpg", "png", "gif"],
+    "documents": ["pdf", "docx", "txt"]
+  }
+}</code></pre>
+    </section>
+
+    <!-- Engineering Challenges -->
+    <section class="section">
+      <h2>Engineering Challenges & Solutions</h2>
+      <ul class="feature-list">
+        <li><strong>Locked Files:</strong> Implemented OS‑specific lock detection and retry logic.</li>
+        <li><strong>Cross‑Platform Paths:</strong> Standardized path handling using <code>pathlib</code>.</li>
+        <li><strong>Large Directories:</strong> Optimized scanning to avoid unnecessary I/O.</li>
+        <li><strong>Safety:</strong> Added dry‑run mode and verbose logs to prevent accidental moves.</li>
+      </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+      <h2>Future Enhancements</h2>
+      <ul class="feature-list">
+        <li>GUI wrapper using Tkinter or PyQt.</li>
+        <li>Cloud‑sync support (OneDrive, Google Drive).</li>
+        <li>Plugin system for custom sort modes.</li>
+        <li>Parallel file movement for large datasets.</li>
+      </ul>
+    </section>
+
+    <!-- Repository -->
     <section class="section">
       <h2>Repository</h2>
       <p>The full source code is available on GitHub:</p>
       <p>
         <a href="https://github.com/davidfifer/file_organizer" target="_blank" rel="noopener" class="repo-link">
-          View the
-          
+          View the Repository →
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>

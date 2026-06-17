@@ -2,123 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>David Fifer | Backend Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>David Fifer – Software Engineer</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body>
-
-  <!-- =========================
-       HERO SECTION
-  ========================== -->
-  <header class="hero">
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
     <div class="hero-content">
-      <h1>Hi, I'm <span class="accent">David Fifer</span></h1>
-      <p class="subtitle">
-        Backend Engineer specializing in automation, developer tooling, and scalable systems.
+      <h1>David Fifer</h1>
+      <p class="tagline">
+        Python • Java • Ruby • Automation • CI/CD
       </p>
-
-      <div class="hero-buttons">
-        <a href="projects/index.html" class="btn primary">View Projects</a>
-        <a href="resume/resume.pdf" class="btn secondary" target="_blank">Download Resume</a>
-      </div>
-
-      <div class="social-links">
-        <a href="https://github.com/davidfifer" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/davidfifer" target="_blank">LinkedIn</a>
-      </div>
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <!-- <a href="#projects" class="btn-primary">View My Work</a> -->
     </div>
-  </header>
+  </section>
 
-  <!-- =========================
-       HIGHLIGHTED PROJECTS
-  ========================== -->
-  <section class="section">
-    <h2>Highlighted Projects</h2>
+  <!-- ABOUT SECTION -->
+  <section id="about" class="about">
+    <h2>About Me</h2>
+    <p>
+      Software Engineer with experience designing, building, and operating scalable
+      distributed systems and backend services. Strong background in Python, Java,
+      DevOps automation, CI/CD, and secure by default platform engineering. 
+    </p>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill">Python</div>
+      <div class="skill">Java</div>
+      <div class="skill">Ruby</div>
+      <div class="skill">SQL</div>
+      <div class="skill">OCI</div>
+      <div class="skill">CI/CD Automation</div>
+      <div class="skill">Distributed Systems</div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="projects">
+    <h2>Python Projects</h2>
 
     <div class="project-grid">
 
-      <!-- Project Card 1 -->
+      <!-- FILE ORGANIZER -->
       <div class="project-card">
         <h3>File Organizer</h3>
         <p>
-          A Python utility that organizes files by extension or modified date, with dry‑run mode,
-          config‑driven behavior, and cross‑platform file‑lock detection.
-        </p>
-        <a href="projects/file-organizer.html" class="btn small">View Details</a>
+          Utility that organizes files by extension or last‑modified date.</p>
+        <a href="/projects/python/file_organizer/" class="btn-secondary">View Details</a>
       </div>
 
-      <!-- Project Card 2 -->
+      <!-- EVENT STREAM PROCESSOR -->
       <div class="project-card">
-        <h3>Log Analyzer</h3>
+        <h3>Event Stream Processor</h3>
         <p>
-          A log‑processing tool that extracts patterns, detects anomalies, and generates structured
-          reports for debugging and observability workflows.
+          High‑throughput Kafka consumer/processor with exactly‑once semantics and
+          observability hooks.
         </p>
-        <a href="projects/log-analyzer.html" class="btn small">View Details</a>
+        <a href="projects/python/event-stream-processor.html" class="btn-secondary">View Details</a>
       </div>
 
-      <!-- Project Card 3 -->
+      <!-- CI/CD ORCHESTRATOR -->
       <div class="project-card">
-        <h3>API Monitor</h3>
+        <h3>CI/CD Pipeline Orchestrator</h3>
         <p>
-          A lightweight monitoring service that tracks API uptime, latency, and error rates with
-          configurable alerting and historical trend analysis.
+          Declarative pipeline engine that automates build, test, and deploy across
+          multiple services.
         </p>
-        <a href="projects/api-monitor.html" class="btn small">View Details</a>
+        <a href="projects/python/cicd-orchestrator.html" class="btn-secondary">View Details</a>
       </div>
 
     </div>
   </section>
 
-  <!-- =========================
-       SKILLS SECTION
-  ========================== -->
-  <section class="section alt">
-    <h2>Technical Skills</h2>
-
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>Languages</h4>
-        <p>Python, Java, SQL, Ruby</p>
-      </div>
-
-      <div class="skill-group">
-        <h4>Cloud & Infra</h4>
-        <p>AWS, Terraform, Docker, Linux</p>
-      </div>
-
-      <div class="skill-group">
-        <h4>Backend Engineering</h4>
-        <p>Distributed Systems, APIs, Automation, CI/CD</p>
-      </div>
-
-      <div class="skill-group">
-        <h4>Tooling</h4>
-        <p>Logging, Monitoring, Config Systems, CLI Tools</p>
-      </div>
-    </div>
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:davidfifer47@gmail.com">davidfifer47@gmail.com</a></p>
+    <p>GitHub: <a href="https://github.com/davidfifer" target="_blank">github.com/davidfifer</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/david-b-fifer" target="_blank">linkedin.com/in/david-b-fifer</a></p>
   </section>
 
-  <!-- =========================
-       CONTACT SECTION
-  ========================== -->
-  <section class="section">
-    <h2>Get in Touch</h2>
-    <p>
-      I'm open to backend engineering roles, automation work, and developer tooling projects.
-      Feel free to reach out.
-    </p>
-
-    <a href="mailto:david@example.com" class="btn primary">Email Me</a>
-  </section>
-
-  <!-- =========================
-       FOOTER
-  ========================== -->
   <footer>
-    © 2026 David Fifer — Backend Engineering Portfolio
+    <p>© 2026 David Fifer</p>
   </footer>
 
 </body>

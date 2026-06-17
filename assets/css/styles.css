@@ -1,6 +1,7 @@
 /* ----------------------------------------
    GLOBAL BASE STYLES
 -----------------------------------------*/
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -8,15 +9,34 @@ body {
   color: #222;
 }
 
-/* HERO */
+/* ----------------------------------------
+   HERO
+-----------------------------------------*/
+
 .hero {
   background: linear-gradient(135deg, #1e1e1e, #3a3a3a);
   color: white;
-@@ -26,62 +33,158 @@
+  padding: 120px 20px;
+  text-align: center;
+}
+
+.hero .tagline {
+  font-size: 1.2rem;
+  margin: 10px 0 30px;
+}
+
+.btn-primary {
+  background: #4f8cff;
+  padding: 12px 24px;
+  color: white;
+  text-decoration: none;
   border-radius: 6px;
 }
 
-/* SKILLS */
+/* ----------------------------------------
+   SKILLS
+-----------------------------------------*/
+
 .skills {
   padding: 60px 20px;
   text-align: center;
@@ -36,7 +56,10 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* PROJECTS */
+/* ----------------------------------------
+   PROJECTS GRID (HOME PAGE)
+-----------------------------------------*/
+
 .projects {
   padding: 60px 20px;
 }
@@ -64,20 +87,34 @@ body {
   border-radius: 6px;
 }
 
-/* ABOUT + CONTACT */
-.about, .contact {
+/* ----------------------------------------
+   ABOUT + CONTACT
+-----------------------------------------*/
+
+.about,
+.contact {
   padding: 60px 20px;
   text-align: center;
 }
 
-/* FOOTER */
+/* ----------------------------------------
+   FOOTER
+-----------------------------------------*/
+
 footer {
   text-align: center;
   padding: 20px;
   background: #eaeaea;
 }
 
-/* Project Page Layout */
+/* ======================================================================
+   PROJECT PAGE STYLES (DETAILED PROJECTS)
+   ======================================================================*/
+
+/* ----------------------------------------
+   Project Page Layout
+-----------------------------------------*/
+
 .project-page {
   max-width: 900px;
   margin: 0 auto;
@@ -86,7 +123,10 @@ footer {
   color: #222;
 }
 
-/* Header */
+/* ----------------------------------------
+   Header
+-----------------------------------------*/
+
 .project-header {
   margin-bottom: 3rem;
   text-align: left;
@@ -117,7 +157,10 @@ footer {
   max-width: 700px;
 }
 
-/* Sections */
+/* ----------------------------------------
+   Sections
+-----------------------------------------*/
+
 .section {
   margin-bottom: 2.5rem;
 }
@@ -129,7 +172,9 @@ footer {
   padding-left: 0.6rem;
 }
 
-/* Feature List */
+/* ----------------------------------------
+   Feature List
+-----------------------------------------*/
 
 .feature-list {
   list-style: none;

@@ -2,95 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>David Fifer – Software Engineer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>David Fifer | Backend Engineer</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
 
 <body>
-  <!-- HERO SECTION -->
-  <section id="hero" class="hero">
+
+  <!-- =========================
+       HERO SECTION
+  ========================== -->
+  <header class="hero">
     <div class="hero-content">
-      <h1>David Fifer</h1>
-      <p class="tagline">
-        Python • Java • Ruby • Automation • CI/CD
+      <h1>Hi, I'm <span class="accent">David Fifer</span></h1>
+      <p class="subtitle">
+        Backend Engineer specializing in automation, developer tooling, and scalable systems.
       </p>
-      <!-- <a href="#projects" class="btn-primary">View My Work</a> -->
-    </div>
-  </section>
 
-  <!-- ABOUT SECTION -->
-  <section id="about" class="about">
-    <h2>About Me</h2>
-    <p>
-      Software Engineer with experience designing, building, and operating scalable
-      distributed systems and backend services. Strong background in Python, Java,
-      DevOps automation, CI/CD, and secure by default platform engineering. 
-    </p>
-  </section>
-  
-  <!-- SKILLS SECTION -->
-  <section id="skills" class="skills">
-    <h2>Skills</h2>
-    <div class="skills-grid">
-      <div class="skill">Python</div>
-      <div class="skill">Java</div>
-      <div class="skill">Ruby</div>
-      <div class="skill">SQL</div>
-      <div class="skill">OCI</div>
-      <div class="skill">CI/CD Automation</div>
-      <div class="skill">Distributed Systems</div>
-    </div>
-  </section>
+      <div class="hero-buttons">
+        <a href="projects/index.html" class="btn primary">View Projects</a>
+        <a href="resume/resume.pdf" class="btn secondary" target="_blank">Download Resume</a>
+      </div>
 
-  <!-- PROJECTS SECTION -->
-  <section id="projects" class="projects">
-    <h2>Python Projects</h2>
+      <div class="social-links">
+        <a href="https://github.com/davidfifer" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/davidfifer" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================
+       HIGHLIGHTED PROJECTS
+  ========================== -->
+  <section class="section">
+    <h2>Highlighted Projects</h2>
 
     <div class="project-grid">
 
-      <!-- FILE ORGANIZER -->
+      <!-- Project Card 1 -->
       <div class="project-card">
         <h3>File Organizer</h3>
         <p>
-          Utility that organizes files by extension or last‑modified date.</p>
-        <a href="/projects/python/file_organizer/" class="btn-secondary">View Details</a>
-      </div>
-
-      <!-- EVENT STREAM PROCESSOR -->
-      <div class="project-card">
-        <h3>Event Stream Processor</h3>
-        <p>
-          High‑throughput Kafka consumer/processor with exactly‑once semantics and
-          observability hooks.
+          A Python utility that organizes files by extension or modified date, with dry‑run mode,
+          config‑driven behavior, and cross‑platform file‑lock detection.
         </p>
-        <a href="projects/python/event-stream-processor.html" class="btn-secondary">View Details</a>
+        <a href="projects/file-organizer.html" class="btn small">View Details</a>
       </div>
 
-      <!-- CI/CD ORCHESTRATOR -->
+      <!-- Project Card 2 -->
       <div class="project-card">
-        <h3>CI/CD Pipeline Orchestrator</h3>
+        <h3>Log Analyzer</h3>
         <p>
-          Declarative pipeline engine that automates build, test, and deploy across
-          multiple services.
+          A log‑processing tool that extracts patterns, detects anomalies, and generates structured
+          reports for debugging and observability workflows.
         </p>
-        <a href="projects/python/cicd-orchestrator.html" class="btn-secondary">View Details</a>
+        <a href="projects/log-analyzer.html" class="btn small">View Details</a>
       </div>
 
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:davidfifer47@gmail.com">davidfifer47@gmail.com</a></p>
-    <p>GitHub: <a href="https://github.com/davidfifer" target="_blank">github.com/davidfifer</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/david-b-fifer" target="_blank">linkedin.com/in/david-b-fifer</a></p>
-  </section>
-
-  <footer>
-    <p>© 2026 David Fifer</p>
-  </footer>
-
-</body>
-</html>
+      <!-- Project Card 3 -->
+      <div class="project-card">
+        <h3>API Monitor</h3>

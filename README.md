@@ -1,5 +1,7 @@
 # Site Flow — davidfifer.github.io
 
+![Portfolio Thumbnail](thumbnail.png)
+
 ## Homepage
 - Hero Section  
   - Name, title, summary  

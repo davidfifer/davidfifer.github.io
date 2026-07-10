@@ -148,7 +148,7 @@
         <li><strong>Validator:</strong> Applies schema rules, checks required fields, and flags invalid rows.</li>
         <li><strong>Transformer:</strong> Cleans and standardizes values (trimming, type coercion, normalization).</li>
         <li><strong>Reporter:</strong> Generates structured summaries of issues, fixes, and statistics.</li>
-        <li><strong>Config Loader:</strong> Reads <code>config.json</code> to define cleaning rules and schema constraints.</li>
+        <li><strong>Config Loader:</strong> Reads <code>rules.yaml</code> to define cleaning rules and schema constraints.</li>
       </ul>
     </section>
 
@@ -161,7 +161,7 @@
         <li><strong>Type Coercion:</strong> Converts numeric and boolean fields to consistent formats.</li>
         <li><strong>Schema Validation:</strong> Ensures required columns exist and values match expected types.</li>
         <li><strong>Duplicate Detection:</strong> Identifies and optionally removes duplicate rows.</li>
-        <li><strong>Custom Rules:</strong> User‑defined transformations via <code>config.json</code>.</li>
+        <li><strong>Custom Rules:</strong> User‑defined transformations via <code>rules.yaml</code>.</li>
         <li><strong>Detailed Reporting:</strong> Summaries of errors, corrections, and dataset statistics.</li>
         <li><strong>Dry‑run Mode:</strong> Preview all changes without modifying the original file.</li>
         <li><strong>Safe Output Handling:</strong> Writes cleaned data to a new file to prevent accidental overwrites.</li>
@@ -172,42 +172,82 @@
     <section class="section">
       <h2>Usage Examples</h2>
 
-      <h3>Basic Cleaning</h3>
-      <pre><code>python csv_data_cleaner.py --input "data.csv" --output "cleaned.csv"</code></pre>
+      <h3>Clean a CSV</h3>
+      <pre><code>python -m csv_cleaner clean data.csv -c config.yaml -o cleaned.csv</code></pre>
 
-      <h3>Dry‑run Mode</h3>
-      <pre><code>python csv_data_cleaner.py --input "raw.csv" --dry_run</code></pre>
+      <h3>Clean + Show Profile</h3>
+      <pre><code>python -m csv_cleaner clean --show-profile data.csv -c config.yaml -o cleaned.csv</code></pre>
 
-      <h3>Custom Schema Validation</h3>
-      <pre><code>python csv_data_cleaner.py --input "users.csv" --config "schema_config.json"</code></pre>
+      <h3>Profile Only</h3>
+      <pre><code>python -m csv_cleaner profile data.csv</code></pre>
 
-      <h3>Verbose Logging</h3>
-      <pre><code>python csv_data_cleaner.py --input "sales.csv" --verbose</code></pre>
+      <h3>Show Version</h3>
+      <pre><code>python -m csv_cleaner version</code></pre>
     </section>
 
     <!-- Config -->
     <section class="section">
       <h2>Configuration</h2>
       <p>
-        The tool reads a <code>config.json</code> file that defines schema rules, cleaning
+        The tool reads a <code>rules.yaml</code> file that defines schema rules, cleaning
         behaviors, and custom transformations. This allows users to tailor the cleaner to
         their dataset without modifying code.
       </p>
 
-      <pre><code>{
-  "dry_run": false,
-  "required_columns": ["id", "name", "email"],
-  "type_map": {
-    "id": "int",
-    "email": "string",
-    "active": "bool"
-  },
-  "remove_duplicates": true,
-  "custom_rules": {
-    "email": "lowercase",
-    "name": "trim"
-  }
-}</code></pre>
+      <pre><code>
+  normalize_columns:
+    enabled: true
+    alias_map:
+      e-mail: email
+  headers:
+    enabled: true
+    required: ["id", "email"]
+    allow_unnamed: false
+  schema:
+    enabled: true
+    required: ["id", "email", "created_at"]
+    drop_extra: true
+  trim_strings:
+    enabled: true
+    columns: ["email"]
+  numeric:
+    enabled: true
+    columns: ["age", "score"]
+  dtypes:
+    enabled: true
+    columns:
+      age: int
+      score: float
+      created_at: datetime
+  fill_missing_values:
+    enabled: true
+    columns:
+      score: mean
+      status: "unknown"
+  dates:
+    enabled: true
+    columns: ["created_at"]
+    format: "%Y-%m-%d"
+    strict: true
+  remove_duplicates:
+    enabled: true
+    subset: ["email"]
+    keep: "first"
+    case_insensitive: true
+  row_filters:
+    enabled: true
+    required_columns: ["email"]
+    drop_if_equals:
+      status: ["inactive", "banned"]
+    numeric_ranges:
+      score:
+        min: 0
+        max: 100
+    regex:
+      email: "^[^@]+@[^@]+$"
+    keep_if:
+      country: ["US", "CA"]
+ </code></pre>
     </section>
 
     <!-- Engineering Challenges -->
@@ -225,10 +265,11 @@
     <section class="section">
       <h2>Future Enhancements</h2>
       <ul class="feature-list">
-        <li>Interactive web UI for rule configuration.</li>
-        <li>Support for JSON, TSV, and Parquet formats.</li>
-        <li>Plugin system for advanced transformations.</li>
-        <li>Integration with ETL orchestration tools.</li>
+        <li>Schema auto‑inference</li>
+        <li>Column‑level statistics in profiler</li>
+        <li>Optional dry‑run mode</li>
+        <li>More advanced regex filtering</li>
+        <li>Built‑in config templates</li>
       </ul>
     </section>
 

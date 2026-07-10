@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSV Data Cleaner – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* ===== Global ===== */
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f9fc;
+        color: #222;
+    }
+
+    .project-page {
+        padding-bottom: 60px;
+    }
+
+    /* ===== Header ===== */
+    .project-header {
+        background: #1e293b;
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .project-header .back-link {
+        display: inline-block;
+        margin-bottom: 15px;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .project-header .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .project-title {
+        margin: 0;
+        font-size: 40px;
+    }
+
+    /* ===== Main Content ===== */
+    .project-content {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    /* ===== Sections ===== */
+    .section {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+        margin-top: 0;
+        color: #0f172a;
+        font-size: 26px;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    /* ===== Lists ===== */
+    .feature-list {
+        padding-left: 20px;
+    }
+
+    .feature-list li {
+        margin-bottom: 10px;
+        font-size: 15px;
+        color: #333;
+    }
+
+    /* ===== Code Blocks ===== */
+    pre {
+        background: #f1f5f9;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    code {
+        font-family: Consolas, monospace;
+    }
+
+    /* ===== Links ===== */
+    .repo-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 14px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .repo-link:hover {
+        background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body class="project-page">
+
+  <header class="project-header">
+    <a href="../../../" class="back-link">← Back to Home</a>
+    <h1 class="project-title">CSV Data Cleaner</h1>
+  </header>
+
+  <main class="project-content">
+
+    <!-- Overview -->
+    <section class="section">
+      <h2>Overview</h2>
+      <p>
+        CSV Data Cleaner is a robust Python utility designed to sanitize, normalize, and validate
+        CSV datasets. It automates common data‑cleaning tasks such as trimming whitespace,
+        removing empty rows, fixing malformed values, enforcing schema rules, and generating
+        detailed reports. The tool emphasizes reliability, transparency, and configurability,
+        making it ideal for analytics pipelines, ETL workflows, and automated preprocessing.
+      </p>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section">
+      <h2>Architecture & Design</h2>
+      <p>
+        The project follows a modular architecture that separates parsing, validation,
+        transformation, reporting, and configuration into dedicated components. This structure
+        makes the tool easy to extend with new cleaning rules or custom validation logic.
+      </p>
+
+      <ul class="feature-list">
+        <li><strong>Parser Module:</strong> Loads CSV files, detects delimiters, and normalizes input.</li>
+        <li><strong>Validator:</strong> Applies schema rules, checks required fields, and flags invalid rows.</li>
+        <li><strong>Transformer:</strong> Cleans and standardizes values (trimming, type coercion, normalization).</li>
+        <li><strong>Reporter:</strong> Generates structured summaries of issues, fixes, and statistics.</li>
+        <li><strong>Config Loader:</strong> Reads <code>config.json</code> to define cleaning rules and schema constraints.</li>
+      </ul>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+      <h2>Key Features</h2>
+      <ul class="feature-list">
+        <li><strong>Whitespace Normalization:</strong> Trims leading/trailing spaces across all fields.</li>
+        <li><strong>Empty Row Removal:</strong> Automatically filters out blank or incomplete rows.</li>
+        <li><strong>Type Coercion:</strong> Converts numeric and boolean fields to consistent formats.</li>
+        <li><strong>Schema Validation:</strong> Ensures required columns exist and values match expected types.</li>
+        <li><strong>Duplicate Detection:</strong> Identifies and optionally removes duplicate rows.</li>
+        <li><strong>Custom Rules:</strong> User‑defined transformations via <code>config.json</code>.</li>
+        <li><strong>Detailed Reporting:</strong> Summaries of errors, corrections, and dataset statistics.</li>
+        <li><strong>Dry‑run Mode:</strong> Preview all changes without modifying the original file.</li>
+        <li><strong>Safe Output Handling:</strong> Writes cleaned data to a new file to prevent accidental overwrites.</li>
+      </ul>
+    </section>
+
+    <!-- Usage Examples -->
+    <section class="section">
+      <h2>Usage Examples</h2>
+
+      <h3>Basic Cleaning</h3>
+      <pre><code>python csv_data_cleaner.py --input "data.csv" --output "cleaned.csv"</code></pre>
+
+      <h3>Dry‑run Mode</h3>
+      <pre><code>python csv_data_cleaner.py --input "raw.csv" --dry_run</code></pre>
+
+      <h3>Custom Schema Validation</h3>
+      <pre><code>python csv_data_cleaner.py --input "users.csv" --config "schema_config.json"</code></pre>
+
+      <h3>Verbose Logging</h3>
+      <pre><code>python csv_data_cleaner.py --input "sales.csv" --verbose</code></pre>
+    </section>
+
+    <!-- Config -->
+    <section class="section">
+      <h2>Configuration</h2>
+      <p>
+        The tool reads a <code>config.json</code> file that defines schema rules, cleaning
+        behaviors, and custom transformations. This allows users to tailor the cleaner to
+        their dataset without modifying code.
+      </p>
+
+      <pre><code>{
+  "dry_run": false,
+  "required_columns": ["id", "name", "email"],
+  "type_map": {
+    "id": "int",
+    "email": "string",
+    "active": "bool"
+  },
+  "remove_duplicates": true,
+  "custom_rules": {
+    "email": "lowercase",
+    "name": "trim"
+  }
+}</code></pre>
+    </section>
+
+    <!-- Engineering Challenges -->
+    <section class="section">
+      <h2>Engineering Challenges & Solutions</h2>
+      <ul class="feature-list">
+        <li><strong>Malformed Rows:</strong> Implemented robust parsing with fallback strategies.</li>
+        <li><strong>Inconsistent Types:</strong> Added type coercion and configurable type maps.</li>
+        <li><strong>Large Datasets:</strong> Stream‑based processing to reduce memory usage.</li>
+        <li><strong>Schema Drift:</strong> Configurable validation rules to detect missing or unexpected columns.</li>
+      </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+      <h2>Future Enhancements</h2>
+      <ul class="feature-list">
+        <li>Interactive web UI for rule configuration.</li>
+        <li>Support for JSON, TSV, and Parquet formats.</li>
+        <li>Plugin system for advanced transformations.</li>
+        <li>Integration with ETL orchestration tools.</li>
+      </ul>
+    </section>
+
+    <!-- Repository -->
+    <section class="section">
+      <h2>Repository</h2>
+      <p>The full source code is available on GitHub:</p>
+      <p>
+        <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/csv_data_cleaner"
+          target="_blank" rel="noopener" class="repo-link">
+          View the Repository →
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>

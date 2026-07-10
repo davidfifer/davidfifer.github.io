@@ -148,7 +148,7 @@
         <li><strong>Validator:</strong> Applies schema rules, checks required fields, and flags invalid rows.</li>
         <li><strong>Transformer:</strong> Cleans and standardizes values (trimming, type coercion, normalization).</li>
         <li><strong>Reporter:</strong> Generates structured summaries of issues, fixes, and statistics.</li>
-        <li><strong>Config Loader:</strong> Reads <code>rules.yaml</code> to define cleaning rules and schema constraints.</li>
+        <li><strong>Config Loader:</strong> Reads a YAML or JSON config file to define cleaning rules and schema constraints.</li>
       </ul>
     </section>
 
@@ -161,7 +161,7 @@
         <li><strong>Type Coercion:</strong> Converts numeric and boolean fields to consistent formats.</li>
         <li><strong>Schema Validation:</strong> Ensures required columns exist and values match expected types.</li>
         <li><strong>Duplicate Detection:</strong> Identifies and optionally removes duplicate rows.</li>
-        <li><strong>Custom Rules:</strong> User‑defined transformations via <code>rules.yaml</code>.</li>
+        <li><strong>Custom Rules:</strong> User‑defined transformations via a YAML or JSON config file.</li>
         <li><strong>Detailed Reporting:</strong> Summaries of errors, corrections, and dataset statistics.</li>
         <li><strong>Dry‑run Mode:</strong> Preview all changes without modifying the original file.</li>
         <li><strong>Safe Output Handling:</strong> Writes cleaned data to a new file to prevent accidental overwrites.</li>
@@ -189,7 +189,7 @@
     <section class="section">
       <h2>Configuration</h2>
       <p>
-        The tool reads a <code>rules.yaml</code> file that defines schema rules, cleaning
+        The tool reads a <code>rules.yaml</code> or <code>rules.json</code> file that defines schema rules, cleaning
         behaviors, and custom transformations. This allows users to tailor the cleaner to
         their dataset without modifying code.
       </p>

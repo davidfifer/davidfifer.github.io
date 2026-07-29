@@ -176,96 +176,59 @@
       </ul>
     </section>
 
-    <!-- Usage Examples -->
-    <section class="section">
-      <h2>Usage Examples</h2>
-
-      <h3>Clean a CSV</h3>
-      <pre><code>python -m csv_cleaner clean data.csv -c config.yaml -o cleaned.csv</code></pre>
-
-      <h3>Clean + Show Profile</h3>
-      <pre><code>python -m csv_cleaner clean --show-profile data.csv -c config.yaml -o cleaned.csv</code></pre>
-
-      <h3>Profile Only</h3>
-      <pre><code>python -m csv_cleaner profile data.csv</code></pre>
-
-      <h3>Show Version</h3>
-      <pre><code>python -m csv_cleaner version</code></pre>
-    </section>
+  <!-- Usage Examples -->
+  <section class="section">
+    <h2>Usage Examples</h2>
+  
+    <h3>Create a Note</h3>
+    <pre><code>curl -X POST https://localhost:8080/api/notes \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer &lt;token&gt;" \
+    -d '{"title":"Meeting Notes","content":"Discuss Q3 roadmap"}'</code></pre>
+  
+    <h3>Get All Notes</h3>
+    <pre><code>curl -X GET https://localhost:8080/api/notes \
+    -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+  
+    <h3>Search Notes</h3>
+    <pre><code>curl -X GET "https://localhost:8080/api/notes/search?query=roadmap" \
+    -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+  
+    <h3>Update a Note</h3>
+    <pre><code>curl -X PUT https://localhost:8080/api/notes/42 \
+    -H "Content-Type: application/json" \
+    -H "Authorization: Bearer &lt;token&gt;" \
+    -d '{"title":"Updated Title","content":"Revised content"}'</code></pre>
+  
+    <h3>Delete a Note</h3>
+    <pre><code>curl -X DELETE https://localhost:8080/api/notes/42 \
+    -H "Authorization: Bearer &lt;token&gt;"</code></pre>
+  
+    <h3>Show API Docs</h3>
+    <pre><code>curl -X GET https://localhost:8080/swagger-ui/index.html</code></pre>
+  </section>
 
     <!-- Config -->
     <section class="section">
       <h2>Configuration</h2>
       <p>
-        The tool reads a <code>rules.yaml</code> or <code>rules.json</code> file that defines schema rules, cleaning
-        behaviors, and custom transformations. This allows users to tailor the cleaner to
-        their dataset without modifying code.
+        NotesAPI uses a standard <code>application.properties</code> or <code>application.yaml</code> file to define
+        environment settings, database connections, JWT parameters, and other runtime options.
+        This allows developers to tailor authentication rules, storage behavior, and service
+        settings without modifying application code.
       </p>
-
-      <pre><code>
-  normalize_columns:
-    enabled: true
-    alias_map:
-      e-mail: email
-  headers:
-    enabled: true
-    required: ["id", "email"]
-    allow_unnamed: false
-  schema:
-    enabled: true
-    required: ["id", "email", "created_at"]
-    drop_extra: true
-  trim_strings:
-    enabled: true
-    columns: ["email"]
-  numeric:
-    enabled: true
-    columns: ["age", "score"]
-  dtypes:
-    enabled: true
-    columns:
-      age: int
-      score: float
-      created_at: datetime
-  fill_missing_values:
-    enabled: true
-    columns:
-      score: mean
-      status: "unknown"
-  dates:
-    enabled: true
-    columns: ["created_at"]
-    format: "%Y-%m-%d"
-    strict: true
-  remove_duplicates:
-    enabled: true
-    subset: ["email"]
-    keep: "first"
-    case_insensitive: true
-  row_filters:
-    enabled: true
-    required_columns: ["email"]
-    drop_if_equals:
-      status: ["inactive", "banned"]
-    numeric_ranges:
-      score:
-        min: 0
-        max: 100
-    regex:
-      email: "^[^@]+@[^@]+$"
-    keep_if:
-      country: ["US", "CA"]
- </code></pre>
     </section>
 
     <!-- Engineering Challenges -->
     <section class="section">
       <h2>Engineering Challenges & Solutions</h2>
       <ul class="feature-list">
-        <li><strong>Malformed Rows:</strong> Implemented robust parsing with fallback strategies.</li>
-        <li><strong>Inconsistent Types:</strong> Added type coercion and configurable type maps.</li>
-        <li><strong>Large Datasets:</strong> Stream‑based processing to reduce memory usage.</li>
-        <li><strong>Schema Drift:</strong> Configurable validation rules to detect missing or unexpected columns.</li>
+        <li><strong>Secure Access Control:</strong> Implemented JWT authentication with token validation and role‑based permissions.</li>
+        <li><strong>Consistent Data Handling:</strong> Added structured entity models and service‑layer validation to prevent malformed note data.</li>
+        <li><strong>Scalable Persistence:</strong> Leveraged Spring Data JPA to manage queries efficiently and support future database growth.</li>
+        <li><strong>Error Reliability:</strong> Introduced centralized exception handling to ensure predictable, uniform API responses.</li>
+        <li><strong>Extensibility:</strong> Designed a modular controller–service–repository architecture to simplify adding new endpoints and features.</li>
+        <li><strong>Deployment Consistency:</strong> Containerized the application with Docker to eliminate environment drift across machines.</li>
       </ul>
     </section>
 
@@ -273,11 +236,15 @@
     <section class="section">
       <h2>Future Enhancements</h2>
       <ul class="feature-list">
-        <li>Schema auto‑inference</li>
-        <li>Column‑level statistics in profiler</li>
-        <li>Optional dry‑run mode</li>
-        <li>More advanced regex filtering</li>
-        <li>Built‑in config templates</li>
+        <li>Add Actuator health checks</li>
+        <li>Add non-root Docker user</li>
+        <li>Add refresh tokens</li>
+        <li>Add pagination for notes</li>
+        <li>Add role-based authorization</li>
+        <li>Add rate limiting</li>
+        <li>Deploy to cloud</li>
+        <li>Add CI/CD pipeline</li>
+        <li>Add React frontend</li>
       </ul>
     </section>
 
@@ -286,7 +253,7 @@
       <h2>Repository</h2>
       <p>The full source code is available on GitHub:</p>
       <p>
-        <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/csv_data_cleaner"
+        <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/java/notesapi"
           target="_blank" rel="noopener" class="repo-link">
           View the Repository →
         </a>

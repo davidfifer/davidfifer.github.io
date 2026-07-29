@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Notes API – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* ===== Global ===== */
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f9fc;
+        color: #222;
+    }
+
+    .project-page {
+        padding-bottom: 60px;
+    }
+
+    /* ===== Header ===== */
+    .project-header {
+        background: #1e293b;
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .project-header .back-link {
+        display: inline-block;
+        margin-bottom: 15px;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .project-header .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .project-title {
+        margin: 0;
+        font-size: 40px;
+    }
+
+    /* ===== Main Content ===== */
+    .project-content {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    /* ===== Sections ===== */
+    .section {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+        margin-top: 0;
+        color: #0f172a;
+        font-size: 26px;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    /* ===== Lists ===== */
+    .feature-list {
+        padding-left: 20px;
+    }
+
+    .feature-list li {
+        margin-bottom: 10px;
+        font-size: 15px;
+        color: #333;
+    }
+
+    /* ===== Code Blocks ===== */
+    pre {
+        background: #f1f5f9;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    code {
+        font-family: Consolas, monospace;
+    }
+
+    /* ===== Links ===== */
+    .repo-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 14px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .repo-link:hover {
+        background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body class="project-page">
+
+  <header class="project-header">
+    <a href="../../../" class="back-link">← Back to Home</a>
+    <h1 class="project-title">Notes API</h1>
+  </header>
+
+  <main class="project-content">
+
+    <!-- Overview -->
+    <section class="section">
+      <h2>Overview</h2>
+      <p>
+          NotesAPI is a modern Java/Spring Boot service built to securely manage and organize
+          user notes. It streamlines common backend tasks such as creating, updating, searching,
+          and deleting notes while enforcing JWT-based authentication and role-aware access
+          control. The API is fully documented with OpenAPI/Swagger, containerized with Docker
+          for consistent deployments, and designed with clear separation of concerns to
+          simplify maintenance and extension. NotesAPI emphasizes reliability, security, and
+          developer ergonomics, making it well-suited for productivity apps, microservice
+          architectures, and automated workflows that depend on structured, persistent note data.
+      </p>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section">
+      <h2>Architecture & Design</h2>
+      <p>
+          NotesAPI adopts a layered, modular architecture that cleanly separates concerns across
+          controllers, services, repositories, and security components. Request handling,
+          business logic, persistence, and authentication are isolated into dedicated modules,
+          making the system predictable, testable, and easy to evolve. This structure enables
+          seamless extension with new endpoints, custom authorization rules, or additional
+          storage strategies while maintaining a clear and maintainable codebase.
+      </p>
+
+      <ul class="feature-list">
+        <li><strong>Controller Layer:</strong> Routes HTTP requests, exposes REST endpoints, and delegates operations to the service layer.</li>
+        <li><strong>Service Layer:</strong> Centralizes business logic, enforces rules, and coordinates interactions between repositories and security modules.</li>
+        <li><strong>Repository Layer:</strong> Manages persistence through Spring Data JPA, handling queries, storage, and entity lifecycle operations.</li>
+        <li><strong>Security Module:</strong> Implements JWT authentication, token validation, and role‑based access control for protected routes.</li>
+        <li><strong>Exception Handling:</strong> Provides consistent, structured error responses through a centralized handler to improve reliability.</li>
+        <li><strong>OpenAPI/Swagger Integration:</strong> Generates interactive API documentation for testing, onboarding, and integration workflows.</li>
+        <li><strong>Dockerized Runtime:</strong> Ensures reproducible environments and smooth deployment across development, staging, and production.</li>
+      </ul>   
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+      <h2>Key Features</h2>
+      <ul class="feature-list">
+        <li><strong>Secure Authentication:</strong> Protects all note operations using JWT‑based login and token validation.</li>
+        <li><strong>CRUD Operations:</strong> Supports creating, reading, updating, and deleting notes through clean REST endpoints.</li>
+        <li><strong>Search & Filtering:</strong> Allows clients to retrieve notes by keywords, timestamps, or user‑specific criteria.</li>
+        <li><strong>Structured Persistence:</strong> Stores notes using Spring Data JPA with predictable entity lifecycle management.</li>
+        <li><strong>Role‑Aware Access Control:</strong> Enforces user permissions to ensure only authorized actions are performed.</li>
+        <li><strong>Consistent Error Handling:</strong> Returns standardized error responses for validation failures and runtime issues.</li>
+        <li><strong>OpenAPI Documentation:</strong> Generates interactive Swagger UI for testing endpoints and onboarding developers.</li>
+        <li><strong>Containerized Deployment:</strong> Runs in a reproducible Docker environment for seamless development and production use.</li>
+        <li><strong>Extensible Design:</strong> Easily accommodates new endpoints, custom rules, or alternative storage backends.</li>
+      </ul>
+    </section>
+
+    <!-- Usage Examples -->
+    <section class="section">
+      <h2>Usage Examples</h2>
+
+      <h3>Clean a CSV</h3>
+      <pre><code>python -m csv_cleaner clean data.csv -c config.yaml -o cleaned.csv</code></pre>
+
+      <h3>Clean + Show Profile</h3>
+      <pre><code>python -m csv_cleaner clean --show-profile data.csv -c config.yaml -o cleaned.csv</code></pre>
+
+      <h3>Profile Only</h3>
+      <pre><code>python -m csv_cleaner profile data.csv</code></pre>
+
+      <h3>Show Version</h3>
+      <pre><code>python -m csv_cleaner version</code></pre>
+    </section>
+
+    <!-- Config -->
+    <section class="section">
+      <h2>Configuration</h2>
+      <p>
+        The tool reads a <code>rules.yaml</code> or <code>rules.json</code> file that defines schema rules, cleaning
+        behaviors, and custom transformations. This allows users to tailor the cleaner to
+        their dataset without modifying code.
+      </p>
+
+      <pre><code>
+  normalize_columns:
+    enabled: true
+    alias_map:
+      e-mail: email
+  headers:
+    enabled: true
+    required: ["id", "email"]
+    allow_unnamed: false
+  schema:
+    enabled: true
+    required: ["id", "email", "created_at"]
+    drop_extra: true
+  trim_strings:
+    enabled: true
+    columns: ["email"]
+  numeric:
+    enabled: true
+    columns: ["age", "score"]
+  dtypes:
+    enabled: true
+    columns:
+      age: int
+      score: float
+      created_at: datetime
+  fill_missing_values:
+    enabled: true
+    columns:
+      score: mean
+      status: "unknown"
+  dates:
+    enabled: true
+    columns: ["created_at"]
+    format: "%Y-%m-%d"
+    strict: true
+  remove_duplicates:
+    enabled: true
+    subset: ["email"]
+    keep: "first"
+    case_insensitive: true
+  row_filters:
+    enabled: true
+    required_columns: ["email"]
+    drop_if_equals:
+      status: ["inactive", "banned"]
+    numeric_ranges:
+      score:
+        min: 0
+        max: 100
+    regex:
+      email: "^[^@]+@[^@]+$"
+    keep_if:
+      country: ["US", "CA"]
+ </code></pre>
+    </section>
+
+    <!-- Engineering Challenges -->
+    <section class="section">
+      <h2>Engineering Challenges & Solutions</h2>
+      <ul class="feature-list">
+        <li><strong>Malformed Rows:</strong> Implemented robust parsing with fallback strategies.</li>
+        <li><strong>Inconsistent Types:</strong> Added type coercion and configurable type maps.</li>
+        <li><strong>Large Datasets:</strong> Stream‑based processing to reduce memory usage.</li>
+        <li><strong>Schema Drift:</strong> Configurable validation rules to detect missing or unexpected columns.</li>
+      </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+      <h2>Future Enhancements</h2>
+      <ul class="feature-list">
+        <li>Schema auto‑inference</li>
+        <li>Column‑level statistics in profiler</li>
+        <li>Optional dry‑run mode</li>
+        <li>More advanced regex filtering</li>
+        <li>Built‑in config templates</li>
+      </ul>
+    </section>
+
+    <!-- Repository -->
+    <section class="section">
+      <h2>Repository</h2>
+      <p>The full source code is available on GitHub:</p>
+      <p>
+        <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/csv_data_cleaner"
+          target="_blank" rel="noopener" class="repo-link">
+          View the Repository →
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>

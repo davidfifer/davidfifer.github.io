@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Distributed Tracing Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    /* ===== Global ===== */
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f7f9fc;
+        color: #222;
+    }
+
+    .project-page {
+        padding-bottom: 60px;
+    }
+
+    /* ===== Header ===== */
+    .project-header {
+        background: #1e293b;
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .project-header .back-link {
+        display: inline-block;
+        margin-bottom: 15px;
+        color: #cbd5e1;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+    .project-header .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .project-title {
+        margin: 0;
+        font-size: 40px;
+    }
+
+    /* ===== Main Content ===== */
+    .project-content {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    /* ===== Sections ===== */
+    .section {
+        background: white;
+        padding: 25px 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .section h2 {
+        margin-top: 0;
+        color: #0f172a;
+        font-size: 26px;
+    }
+
+    .section p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    /* ===== Lists ===== */
+    .feature-list {
+        padding-left: 20px;
+    }
+
+    .feature-list li {
+        margin-bottom: 10px;
+        font-size: 15px;
+        color: #333;
+    }
+
+    /* ===== Code Blocks ===== */
+    pre {
+        background: #f1f5f9;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    code {
+        font-family: Consolas, monospace;
+    }
+
+    /* ===== Links ===== */
+    .repo-link {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 14px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 14px;
+    }
+
+    .repo-link:hover {
+        background: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body class="project-page">
+
+  <header class="project-header">
+    <a href="../../../" class="back-link">← Back to Home</a>
+    <h1 class="project-title">Distributed Tracing Demo</h1>
+  </header>
+
+  <main class="project-content">
+
+    <!-- Overview -->
+    <section class="section">
+      <h2>Overview</h2>
+      <p>
+        distributed-tracing-demo is a lightweight FastAPI microservice system designed to showcase
+        real-world <strong>distributed tracing</strong>, <strong>latency propagation</strong>, and <strong>error propagation</strong> across service boundaries.
+        It provides a clean, containerized environment where three cooperating services—frontend,
+        API, and worker—emit spans through OpenTelemetry and visualize them in Jaeger. The project
+        emphasizes clarity, reliability, and hands-on observability, making it ideal for engineers
+        exploring <strong>OpenTelemetry</strong>, microservice debugging patterns, or modern tracing workflows.
+      </p>
+      <p>
+        With built‑in chaos mode, structured span attributes, and both auto‑instrumented and
+        manually‑created spans, the demo highlights how trace context flows through a multi‑hop
+        request and how failures ripple through upstream services. Its Docker‑based orchestration,
+        simple architecture, and well‑documented behavior make it a practical teaching tool,
+        a foundation for experimentation, and a reference implementation for teams adopting
+        distributed tracing in production systems.
+      </p>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section">
+      <h2>Architecture & Design</h2>
+      <p>
+        distributed-tracing-demo is built around a deliberately simple but expressive microservice
+        architecture that highlights how <strong>trace context</strong> moves through a real system.
+        The project consists of three FastAPI services—frontend, API, and worker—each running in its
+        own container and communicating over lightweight HTTP calls. This separation mirrors
+        production-style service boundaries and makes it easy to observe how latency, failures, and
+        retries propagate across hops.
+      </p>
+      <p>
+        Each service is instrumented with <strong>OpenTelemetry</strong> using a mix of automatic and manual span creation.
+        Core behaviors such as request handling, downstream calls, background work, and chaos-mode
+        fault injection are isolated into clear modules, ensuring that tracing logic never pollutes
+        business logic. The design emphasizes readability, minimal coupling, and predictable flow,
+        making it straightforward to extend with new endpoints, additional spans, custom attributes,
+        or alternative exporters.
+      </p>
+      <p>
+        Docker Compose orchestrates the entire system, providing a reproducible environment where
+        Jaeger, the services, and supporting components start as a unified stack. This containerized
+        layout ensures consistent behavior across machines and simplifies experimentation with
+        <strong>observability patterns</strong>, failure scenarios, and multi-service debugging techniques.
+      </p>
+
+      <ul class="feature-list">
+        <li>
+          <strong>Frontend Service:</strong>
+          Handles incoming user requests, generates initial spans, and forwards calls to the API service while preserving trace context. It provides a clean entry point for observing how upstream latency and errors propagate through the system.
+        </li>
+        <li>
+          <strong>API Service:</strong>
+          Acts as the central coordinator, performing downstream calls to the worker service, enriching spans with custom attributes, and demonstrating both auto‑instrumented and manual tracing patterns.
+        </li>        
+        <li>
+          <strong>Worker Service:</strong>
+          Simulates background or computational work, introduces optional chaos‑mode delays and failures, and showcases how trace context flows into deeper layers of a distributed system.
+        </li>        
+        <li>
+          <strong>OpenTelemetry Instrumentation:</strong>
+          Provides end‑to‑end distributed tracing with consistent span structure, context propagation, custom attributes, and clear visibility into multi‑hop request flows.
+        </li>        
+        <li>
+          <strong>Chaos Mode:</strong>
+          Injects randomized latency, errors, and jitter to demonstrate how failures ripple through upstream services and how traces reveal bottlenecks and instability.
+        </li>        
+        <li>
+          <strong>Structured Error Handling:</strong>
+          Produces predictable error responses and trace annotations, making it easy to diagnose failure points and understand how exceptions affect the overall trace.
+        </li>        
+        <li>
+          <strong>Jaeger Integration:</strong>
+          Offers real‑time visualization of spans, timing, and service interactions, enabling intuitive exploration of request lifecycles and debugging patterns.
+        </li>        
+        <li>
+          <strong>Dockerized Runtime:</strong>
+          Uses Docker Compose to orchestrate all services and Jaeger, ensuring reproducible environments, simple onboarding, and consistent behavior across machines.
+        </li>
+      </ul>      
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+      <h2>Key Features</h2>
+      <ul class="feature-list">
+      <li>
+        <strong>End‑to‑End Tracing:</strong>
+        Captures every request as a trace that flows through the frontend, API, and worker
+        services, making it easy to visualize latency, bottlenecks, and multi‑hop behavior.
+      </li>      
+      <li>
+        <strong>Multi‑Service Request Flow:</strong>
+        Demonstrates how distributed systems handle upstream and downstream calls, including
+        context propagation, retries, and structured span attributes.
+      </li>      
+      <li>
+        <strong>Chaos Mode Simulation:</strong>
+        Injects randomized latency, jitter, and controlled failures to mimic real‑world
+        instability and reveal how errors ripple through dependent services.
+      </li>      
+      <li>
+        <strong>Structured Span Data:</strong>
+        Enriches traces with custom attributes such as timing markers, worker behavior flags,
+        and chaos indicators, enabling deeper debugging and performance analysis.
+      </li>      
+      <li>
+        <strong>Consistent Error Surfacing:</strong>
+        Produces predictable error responses and trace annotations that help correlate failures
+        with their originating spans and upstream impact.
+      </li>      
+      <li>
+        <strong>Jaeger Visualization:</strong>
+        Provides real‑time span inspection, service dependency graphs, and timing breakdowns,
+        giving developers an intuitive view of distributed workflows.
+      </li>      
+      <li>
+        <strong>Containerized Deployment:</strong>
+        Runs all services and Jaeger in a reproducible Docker Compose environment, ensuring
+        consistent behavior across machines and simplifying onboarding.
+      </li>      
+    </section>
+
+  <!-- Usage Examples -->
+  <section class="section">
+    <h2>Usage Examples</h2>
+    <h3>Trigger a Basic Frontend Request</h3>
+    <pre><code>curl -X GET http://localhost:8000/start</code></pre>
+    
+    <h3>Trigger a Full Trace (Frontend → API → Worker)</h3>
+    <pre><code>curl -X GET http://localhost:8000/start</code></pre>
+    
+    <h3>Enable Chaos Mode (Random Latency & Errors)</h3>
+    <pre><code>curl -X GET "http://localhost:8000/start?chaos=true"</code></pre>
+    
+    <h3>Send Multiple Chaos Requests</h3>
+    <pre><code>for i in {1..10}; do \
+    curl -s "http://localhost:8000/start?chaos=true"; \
+    echo; \
+    done</code></pre>
+    
+    <h3>Call API Service Directly</h3>
+    <pre><code>curl -X GET "http://localhost:8001/process?chaos=false"</code></pre>
+    
+    <h3>Call Worker Service Directly</h3>
+    <pre><code>curl -X GET "http://localhost:8002/work?chaos=true"</code></pre>
+    
+    <h3>View Traces in Jaeger</h3>
+    <pre><code>http://localhost:16686</code></pre>    
+  </section>
+
+    <!-- Config -->
+    <section class="section">
+      <h2>Configuration</h2>
+      <p>
+        distributed‑tracing-demo uses simple, service‑specific <code>config.py</code> files and environment
+        variables to control tracing behavior, exporter settings, chaos‑mode parameters, and runtime
+        options. Each service (frontend, API, worker) loads its own configuration at startup, allowing
+        developers to adjust latency injection, error simulation, span attributes, and OpenTelemetry
+        exporters without modifying application code.
+      </p>
+      <p>
+        The project also supports Docker‑based configuration through <code>docker-compose.yaml</code>, enabling
+        consistent setup of Jaeger, service ports, environment flags, and development overrides. This
+        flexible configuration model makes it easy to experiment with tracing flows, toggle chaos
+        mode, or integrate alternative observability backends.
+      </p>
+      
+    </section>
+
+    <!-- Engineering Challenges -->
+    <section class="section">
+      <h2>Engineering Challenges & Solutions</h2>
+      <ul class="feature-list">
+        <li>
+          <strong>Trace Context Propagation:</strong>
+          Ensuring consistent trace context across three independent FastAPI services required
+          careful coordination of headers, middleware, and OpenTelemetry instrumentation. The
+          solution was a unified propagation strategy that guarantees every hop—frontend, API,
+          worker—contributes clean, connected spans.
+        </li>      
+        <li>
+          <strong>Multi‑Service Latency Visibility:</strong>
+          Distributed systems often hide where latency originates. The demo solves this by
+          enriching spans with custom timing attributes and structuring traces so developers can
+          immediately see which service introduced delay and how it affected upstream calls.
+        </li>      
+        <li>
+          <strong>Chaos‑Mode Stability:</strong>
+          Injecting randomized failures and jitter without destabilizing the entire stack was a
+          challenge. The solution was isolating chaos logic inside the worker service and
+          annotating spans with chaos indicators, allowing controlled experimentation without
+          breaking the environment.
+        </li>      
+        <li>
+          <strong>Consistent Error Surfacing:</strong>
+          Errors in distributed systems often appear disconnected or ambiguous. The project
+          addresses this by producing predictable error responses and attaching structured
+          exception metadata to spans, making failure origins immediately visible in Jaeger.
+        </li>      
+        <li>
+          <strong>Observability Extensibility:</strong>
+          Supporting both auto‑instrumented and manual spans while keeping the codebase clean
+          required a modular tracing design. Each service isolates tracing concerns, making it
+          easy to add new endpoints, exporters, or span attributes without disrupting existing
+          flows.
+        </li>      
+        <li>
+          <strong>Reproducible Deployment:</strong>
+          Running multiple services plus Jaeger consistently across machines can be error‑prone.
+          Docker Compose solves this by orchestrating the entire stack with predictable ports,
+          environment variables, and startup order, eliminating environment drift.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+      <h2>Future Enhancements</h2>
+      <ul class="feature-list">
+        <li>Grafana dashboards - Visualize latency, retries, queue depth, and chaos impact</li>
+        <li>Service Level Objectives (SLOs) - Define latency/error targets and track error budgets</li>
+        <li>Prometheus alerts - Detect retry spikes, queue overflow, and worker failures</li>
+        <li>Trace analysis documentation - Explain distributed trace behavior and failure propagation</li>
+        <li>Additional chaos scenarios - CPU burn, memory pressure, queue overflow, random worker crashes</li>
+      </ul>
+    </section>
+
+    <!-- Repository -->
+    <section class="section">
+      <h2>Repository</h2>
+      <p>The full source code is available on GitHub:</p>
+      <p>
+        <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/distributed-tracing-demo"
+          target="_blank" rel="noopener" class="repo-link">
+          View the Repository →
+        </a>
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>

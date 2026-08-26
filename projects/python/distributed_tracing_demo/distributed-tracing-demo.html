@@ -126,12 +126,12 @@
     <section class="section">
       <h2>Overview</h2>
       <p>
-        distributed-tracing-demo is a lightweight FastAPI microservice system designed to showcase
-        real-world <strong>distributed tracing</strong>, <strong>latency propagation</strong>, and <strong>error propagation</strong> across service boundaries.
+        distributed_tracing_demo is a lightweight FastAPI microservice system designed to showcase
+        real-world distributed tracing, latency propagation, and error propagation across service boundaries.
         It provides a clean, containerized environment where three cooperating services—frontend,
         API, and worker—emit spans through OpenTelemetry and visualize them in Jaeger. The project
         emphasizes clarity, reliability, and hands-on observability, making it ideal for engineers
-        exploring <strong>OpenTelemetry</strong>, microservice debugging patterns, or modern tracing workflows.
+        exploring OpenTelemetry, microservice debugging patterns, or modern tracing workflows.
       </p>
       <p>
         With built‑in chaos mode, structured span attributes, and both auto‑instrumented and
@@ -147,15 +147,15 @@
     <section class="section">
       <h2>Architecture & Design</h2>
       <p>
-        distributed-tracing-demo is built around a deliberately simple but expressive microservice
-        architecture that highlights how <strong>trace context</strong> moves through a real system.
+        distributed_tracing_demo is built around a deliberately simple but expressive microservice
+        architecture that highlights how trace context moves through a real system.
         The project consists of three FastAPI services—frontend, API, and worker—each running in its
         own container and communicating over lightweight HTTP calls. This separation mirrors
         production-style service boundaries and makes it easy to observe how latency, failures, and
         retries propagate across hops.
       </p>
       <p>
-        Each service is instrumented with <strong>OpenTelemetry</strong> using a mix of automatic and manual span creation.
+        Each service is instrumented with OpenTelemetry using a mix of automatic and manual span creation.
         Core behaviors such as request handling, downstream calls, background work, and chaos-mode
         fault injection are isolated into clear modules, ensuring that tracing logic never pollutes
         business logic. The design emphasizes readability, minimal coupling, and predictable flow,

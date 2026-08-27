@@ -550,17 +550,19 @@
       background: rgba(15, 23, 42, 0.95);
       padding: 14px 12px 12px;
       box-shadow: var(--shadow-subtle);
+    
+      /* FIXED LAYOUT */
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
+      flex-direction: column;   /* stack text + links cleanly */
+      align-items: flex-start;  /* prevent weird centering */
+      gap: 16px;                /* consistent spacing */
     }
-
+    
     .contact-text {
       font-size: 0.9rem;
       color: var(--muted);
       max-width: 420px;
+      line-height: 1.55;        /* improves readability */
     }
 
     .contact-links {
@@ -958,12 +960,14 @@
       <div class="section-header">
         <h2 class="section-title">Contact</h2>
       </div>
+    
       <div class="contact-card">
         <p class="contact-text">
           I design reliable systems, automate complex workflows, and help teams ship software more effectively.<br>
           I build clear, maintainable solutions across services, infrastructure, and developer tooling.<br>
           If that aligns with what you're building, I’d be glad to connect.
         </p>
+    
         <div class="contact-links">
           <a href="mailto:davififer47@gmail.com" class="contact-link">
             <span class="btn-icon">✉️</span>

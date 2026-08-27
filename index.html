@@ -561,7 +561,8 @@
     .contact-text {
       font-size: 0.9rem;
       color: var(--muted);
-      max-width: 420px;
+      max-width: none;     /* allow full width of the card */
+      white-space: nowrap; /* prevent wrapping entirely */
       line-height: 1.55;
     }
 
@@ -957,8 +958,8 @@
     
       <div class="contact-card">
         <p class="contact-text">
-          I design reliable systems, automate complex workflows, and help engineering teams ship software with greater confidence and less friction.<br><br>
-          My work spans backend services, infrastructure, and developer tooling, with an emphasis on clarity, maintainability, and long‑term reliability.<br><br>
+          I design reliable systems, automate complex workflows, and help engineering teams ship software with greater confidence and less friction.
+          My work spans backend services, infrastructure, and developer tooling, with an emphasis on clarity, maintainability, and long‑term reliability.
           If that aligns with what you're building, I’d be glad to connect.
         </p>
         <div class="contact-links">

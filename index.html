@@ -384,18 +384,18 @@
       font-size: 0.85rem;
       color: var(--muted);
       box-shadow: var(--shadow-subtle);
+    
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      row-gap: 8px;
+      column-gap: 12px;
     }
-
-    .about-meta-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    }
-
+    
     .about-meta-label {
       color: var(--muted);
+      font-weight: 500;
     }
-
+    
     .about-meta-value {
       color: var(--text);
       font-weight: 500;
@@ -765,25 +765,19 @@
             </li>
           </ul>
         </div>
-        <aside class="about-meta">
-          <div class="about-meta-row">
-            <span class="about-meta-label">Role</span>
-            <span class="about-meta-value">Software Engineer (Systems, Backend, Automation)</span>
-          </div>
-          <div class="about-meta-row">
-            <span class="about-meta-label">Strengths</span>
-            <span class="about-meta-value">Reliability, automation, distributed systems, developer experience</span>
-          </div>
-          <div class="about-meta-row">
-            <span class="about-meta-label">Languages</span>
-            <span class="about-meta-value">Python, Java, Ruby</span>
-          </div>
-          <div class="about-meta-row">
-            <span class="about-meta-label">Cloud & Infra</span>
-            <span class="about-meta-value">OCI, Terraform(familiar), Docker(familar)</span>
-          </div>
-        </aside>
-      </div>
+        <div class="about-meta">
+          <span class="about-meta-label">Role</span>
+          <span class="about-meta-value">Software Engineer (Backend, Systems, Automation)</span>
+        
+          <span class="about-meta-label">Strengths</span>
+          <span class="about-meta-value">Reliability, automation, distributed systems, developer experience</span>
+        
+          <span class="about-meta-label">Languages</span>
+          <span class="about-meta-value">Python, Java, Ruby</span>
+        
+          <span class="about-meta-label">Cloud & Infra</span>
+          <span class="about-meta-value">OCI, Terraform (familiar), Docker (familiar)</span>
+        </div>
     </section>
 
     <!-- Skills -->

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Rate Limiter Service – Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        /* ===== Global ===== */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #222;
+        }
+
+        .project-page {
+            padding-bottom: 60px;
+        }
+
+        /* ===== Header ===== */
+        .project-header {
+            background: #1e293b;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .project-header .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .project-header .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-title {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        /* ===== Main Content ===== */
+        .project-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Sections ===== */
+        .section {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 26px;
+        }
+
+        .section h3 {
+            margin-top: 20px;
+            color: #111827;
+            font-size: 20px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* ===== Lists ===== */
+        .feature-list {
+            padding-left: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* ===== Code Blocks ===== */
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        /* ===== Links ===== */
+        .repo-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .repo-link:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body class="project-page">
+
+<header class="project-header">
+    <a href="../../../" class="back-link">← Back to Home</a>
+    <h1 class="project-title">Rate Limiter Service</h1>
+</header>
+
+<main class="project-content">
+
+    <!-- Overview -->
+    <section class="section">
+        <h2>Overview</h2>
+        <p>
+            Rate Limiter Service is a production-style Java/Spring Boot microservice that enforces
+            per‑API‑key rate limits using a token bucket algorithm. It is designed to sit in front
+            of existing APIs or be embedded in a gateway, protecting downstream services from
+            overload and abusive traffic while preserving burst capacity for legitimate clients.
+            The service is fully config‑driven, thread‑safe, and exposes a simple REST endpoint
+            for checking whether a request should be allowed, along with remaining tokens.
+        </p>
+        <p>
+            The project emphasizes clean architecture, concurrency correctness, and testable
+            algorithmic behavior. It includes unit tests, Dockerization, and a documented roadmap,
+            making it a strong portfolio piece for backend and systems‑focused roles.
+        </p>
+    </section>
+
+    <!-- Architecture & Design -->
+    <section class="section">
+        <h2>Architecture & Design</h2>
+        <p>
+            The Rate Limiter Service follows a layered architecture that separates HTTP handling,
+            business logic, algorithm implementation, and configuration. This structure keeps the
+            core rate limiting logic independent from transport concerns and makes it easy to
+            evolve the service with new strategies or integration points.
+        </p>
+
+        <ul class="feature-list">
+            <li><strong>Controller Layer:</strong> Exposes a REST <code>/check</code> endpoint that accepts an API key and returns whether the request is allowed plus remaining tokens.</li>
+            <li><strong>Service Layer:</strong> Implements rate limiting rules, loads per‑key configuration, creates token buckets lazily, and applies defaults when no explicit config exists.</li>
+            <li><strong>Token Bucket Algorithm:</strong> Encapsulated in a dedicated <code>TokenBucket</code> class with fields for capacity, current tokens, refill rate, and last refill timestamp.</li>
+            <li><strong>Thread‑Safe Store:</strong> Uses a <code>ConcurrentHashMap</code>‑backed <code>TokenBucketStore</code> to manage buckets per API key safely under concurrent access.</li>
+            <li><strong>Configuration Module:</strong> A <code>RateLimitProperties</code> class binds to <code>application.yml</code>, enabling per‑key and default limits without code changes.</li>
+            <li><strong>DTOs:</strong> Simple request/response DTOs keep the API contract clear and decoupled from internal models.</li>
+            <li><strong>Dockerized Runtime:</strong> A Dockerfile provides a reproducible container image suitable for local testing and deployment.</li>
+        </ul>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+        <h2>Key Features</h2>
+        <ul class="feature-list">
+            <li><strong>Token Bucket Rate Limiting:</strong> Supports bursty traffic while enforcing a steady average rate per API key.</li>
+            <li><strong>Per‑Key Configuration:</strong> Allows different limits for different clients via config‑driven settings.</li>
+            <li><strong>Default Limits:</strong> Applies sensible defaults when a key is not explicitly configured.</li>
+            <li><strong>Thread‑Safe Concurrency:</strong> Uses concurrent data structures and careful logic to avoid race conditions.</li>
+            <li><strong>Clean Layered Design:</strong> Separates controller, service, store, and algorithm for maintainability.</li>
+            <li><strong>REST API:</strong> Simple <code>/check</code> endpoint that can be called from gateways, proxies, or other services.</li>
+            <li><strong>Unit Tests:</strong> Covers token bucket behavior and service‑level logic, including timing and remaining tokens.</li>
+            <li><strong>Dockerization:</strong> Containerized for consistent local and cloud deployment.</li>
+            <li><strong>Phase 2 Roadmap:</strong> Documented future enhancements such as additional algorithms and observability.</li>
+        </ul>
+    </section>
+
+    <!-- Usage Examples -->
+    <section class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Check Rate Limit for an API Key</h3>
+        <pre><code>curl -X POST http://localhost:8080/api/ratelimit/check \
+  -H "Content-Type: application/json" \
+  -d '{"apiKey":"client-123"}'</code></pre>
+
+        <p>Example JSON response:</p>
+        <pre><code>{
+  "allowed": true,
+  "remainingTokens": 47
+}</code></pre>
+
+        <h3>Example application.yml Configuration</h3>
+        <pre><code>rate-limits:
+  default-limit:
+    capacity: 50
+    refill-rate: 5
+  api-keys:
+    client-123:
+      capacity: 100
+      refill-rate: 10</code></pre>
+
+        <h3>Run with Docker</h3>
+        <pre><code># Build image
+docker build -t rate-limiter .
+
+# Run container
+docker run -p 8080:8080 rate-limiter</code></pre>
+    </section>
+
+    <!-- Engineering Challenges & Solutions -->
+    <section class="section">
+        <h2>Engineering Challenges & Solutions</h2>
+        <ul class="feature-list">
+            <li><strong>Correct Token Bucket Logic:</strong> Implemented precise refill and consume behavior with safeguards against exceeding capacity or going negative.</li>
+            <li><strong>Time‑Based Refills:</strong> Used timestamps to compute how many tokens to add since the last refill, ensuring realistic rate enforcement.</li>
+            <li><strong>Concurrency Safety:</strong> Chose <code>ConcurrentHashMap</code> and carefully structured updates to avoid race conditions when multiple requests hit the same key.</li>
+            <li><strong>Config‑Driven Design:</strong> Bound rate limit settings from <code>application.yml</code> into a typed properties class, keeping logic flexible and environment‑aware.</li>
+            <li><strong>API Contract Clarity:</strong> Introduced DTOs so the external API remains stable even if internal models change.</li>
+            <li><strong>Testability:</strong> Wrote unit tests for both the algorithm and service layer, including timing‑sensitive scenarios and edge cases.</li>
+            <li><strong>Production Readiness:</strong> Added Docker support and documentation so the service can be run consistently across machines.</li>
+        </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+        <h2>Future Enhancements</h2>
+        <ul class="feature-list">
+            <li>Add alternative algorithms (fixed window, sliding window, leaky bucket).</li>
+            <li>Add distributed store support (Redis) for multi‑instance deployments.</li>
+            <li>Add metrics and tracing for observability (e.g., Prometheus, OpenTelemetry).</li>
+            <li>Add integration tests with a sample downstream API.</li>
+        </ul>
+    </section>
+
+    <!-- Repository -->
+    <section class="section">
+        <h2>Repository</h2>
+        <p>The full source code is available on GitHub:</p>
+        <p>
+            <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/java/rate-limiter-service"
+               target="_blank" rel="noopener" class="repo-link">
+                View the Repository →
+            </a>
+        </p>
+    </section>
+
+</main>
+
+</body>
+</html>

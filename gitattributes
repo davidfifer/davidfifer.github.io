@@ -1,5 +1,7 @@
-*.html linguist-generated=true
-*.css linguist-generated=true
-*.js linguist-generated=true
-*.log linguist-generated=true
-docs/* linguist-generated=true
+# Mark all HTML/CSS/JS as generated, no matter where they live
+**/*.html linguist-generated=true
+**/*.css linguist-generated=true
+**/*.js linguist-generated=true
+
+# Optional: logs too
+**/*.log linguist-generated=true

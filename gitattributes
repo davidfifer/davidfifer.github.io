@@ -1,7 +1,17 @@
-# Mark all HTML/CSS/JS as generated, no matter where they live
+# --- Global HTML/CSS/JS rules ---
+*.html linguist-generated=true
+*.css linguist-generated=true
+*.js linguist-generated=true
+
+# --- Optional: logs ---
+*.log linguist-generated=true
+
+# --- Folder-level rules (GitHub Pages repos need this) ---
+projects/** linguist-generated=true
+assets/** linguist-generated=true
+
+# --- Catch-all for nested content ---
 **/*.html linguist-generated=true
 **/*.css linguist-generated=true
 **/*.js linguist-generated=true
-
-# Optional: logs too
 **/*.log linguist-generated=true

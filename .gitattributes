@@ -1,0 +1,11 @@
+# --- Global HTML/CSS/JS rules ---
+*.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
+
+# --- Optional: logs ---
+*.log linguist-vendored
+
+# --- Folder-level rules (GitHub Pages repos need this) ---
+projects/** linguist-vendored
+assets/** linguist-vendored

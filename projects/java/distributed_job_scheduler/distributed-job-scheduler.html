@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Distributed Job Scheduler – Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <style>
+        /* ===== Global ===== */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #222;
+        }
+
+        .project-page {
+            padding-bottom: 60px;
+        }
+
+        /* ===== Header ===== */
+        .project-header {
+            background: #1e293b;
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .project-header .back-link {
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .project-header .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-title {
+            margin: 0;
+            font-size: 40px;
+        }
+
+        /* ===== Main Content ===== */
+        .project-content {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Sections ===== */
+        .section {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            margin-top: 0;
+            color: #0f172a;
+            font-size: 26px;
+        }
+
+        .section h3 {
+            margin-top: 20px;
+            color: #111827;
+            font-size: 20px;
+        }
+
+        .section p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* ===== Lists ===== */
+        .feature-list {
+            padding-left: 20px;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #333;
+        }
+
+        /* ===== Code Blocks ===== */
+        pre {
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+
+        /* ===== Links ===== */
+        .repo-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .repo-link:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body class="project-page">
+
+<header class="project-header">
+    <a href="../../../" class="back-link">← Back to Home</a>
+    <h1 class="project-title">Distributed Job Scheduler</h1>
+</header>
+
+<main class="project-content">
+
+    <!-- Overview -->
+    <section class="section">
+        <h2>Overview</h2>
+        <p>
+            Distributed Job Scheduler is a production-style backend system that enables
+            asynchronous job execution using a scheduler service, worker service,
+            and shared PostgreSQL persistence layer. The project demonstrates
+            common patterns used in distributed systems, including durable job
+            storage, polling-based work acquisition, retry handling, failure recovery,
+            and containerized deployment.
+        </p>
+        <p>
+            Jobs are submitted through a REST API and stored in PostgreSQL.
+            The scheduler service manages job scheduling and status updates,
+            while the worker service executes pending jobs and records execution
+            results. The project demonstrates asynchronous job processing,
+            persistent state management, and a microservice-style architecture
+            using Spring Boot, PostgreSQL, and Docker.
+        </p>
+    </section>
+
+    <!-- Architecture -->
+    <section class="section">
+        <h2>Architecture & Design</h2>
+        <p>
+            The application follows a microservice-style architecture that separates
+            job management from job execution responsibilities. PostgreSQL acts as
+            the system of record, ensuring job state remains durable across service
+            restarts and failures.
+        </p>
+
+        <ul class="feature-list">
+            <li><strong>Scheduler Service:</strong> Exposes REST endpoints for job creation and periodically identifies runnable jobs.</li>
+            <li><strong>Worker Service:</strong> Polls available work, executes jobs, and updates execution status.</li>
+            <li><strong>PostgreSQL Persistence:</strong> Stores job definitions, schedules, execution attempts, timestamps, and status transitions.</li>
+            <li><strong>Repository Layer:</strong> Uses Spring Data JPA for persistence and transaction management.</li>
+            <li><strong>Retry Mechanism:</strong> Failed jobs are automatically rescheduled until maximum retry limits are reached.</li>
+            <li><strong>Job State Machine:</strong> Jobs transition through states such as <code>PENDING</code>, <code>RUNNING</code>, <code>SUCCESS</code>, and <code>FAILED</code>.</li>
+            <li><strong>Metrics Tracking:</strong> Basic execution and failure counters provide operational visibility.</li>
+            <li><strong>Containerized Deployment:</strong> Docker and Docker Compose enable repeatable local environments and multi-service orchestration.</li>
+        </ul>
+    </section>
+
+    <!-- Key Features -->
+    <section class="section">
+        <h2>Key Features</h2>
+        <ul class="feature-list">
+            <li><strong>REST-Based Job Submission:</strong> Create scheduled jobs through a simple HTTP API.</li>
+            <li><strong>Durable Job Storage:</strong> Jobs survive application restarts because state is persisted in PostgreSQL.</li>
+            <li><strong>Asynchronous Processing:</strong> Job execution occurs independently from job submission.</li>
+            <li><strong>Configurable Retry Logic:</strong> Failed jobs can be retried automatically up to configured limits.</li>
+            <li><strong>Status Tracking:</strong> Track job execution progress and final outcomes.</li>
+            <li><strong>Health Checks:</strong> Container health endpoints support operational monitoring.</li>
+            <li><strong>Metrics Collection:</strong> Execution counts and failure counts provide visibility into system behavior.</li>
+            <li><strong>Docker Compose Environment:</strong> Launch the complete stack with a single command.</li>
+        </ul>
+    </section>
+
+    <!-- Usage Examples -->
+    <section class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Create a Job</h3>
+        <pre><code>curl -X POST http://localhost:8080/jobs \
+  -H "Content-Type: application/json" \
+  -d '{
+    "payload":"Generate report"
+  }'</code></pre>
+
+        <p>Example response:</p>
+        <pre><code>{
+  "id": "e3d2f5d2-7a7f-41be-a7d2-1df74f35f0b5",
+  "status": "PENDING"
+}</code></pre>
+
+        <h3>Retrieve Job Status</h3>
+        <pre><code>curl http://localhost:8080/jobs/e3d2f5d2-7a7f-41be-a7d2-1df74f35f0b5</code></pre>
+
+        <h3>Run the Complete Stack</h3>
+        <pre><code>docker compose up --build</code></pre>
+
+        <h3>Services</h3>
+        <pre><code>Scheduler Service : http://localhost:8080
+Worker Service    : http://localhost:8081
+PostgreSQL        : localhost:5432</code></pre>
+    </section>
+
+    <!-- Engineering Challenges -->
+    <section class="section">
+        <h2>Engineering Challenges & Solutions</h2>
+        <ul class="feature-list">
+            <li>
+                <strong>Job Coordination:</strong>
+                Designed database-driven job acquisition logic that ensures workers
+                process eligible jobs while maintaining consistent job state.
+            </li>
+            <li>
+                <strong>Fault Tolerance:</strong>
+                Persisted job state in PostgreSQL so work is not lost during
+                application restarts or service failures.
+            </li>
+            <li>
+                <strong>Execution Tracking:</strong>
+                Records job attempts, status transitions, and scheduling metadata,
+                providing the foundation for future retry and recovery capabilities.
+            </li>
+            <li>
+                <strong>State Management:</strong>
+                Created a simple job lifecycle model with clearly defined status transitions.
+            </li>
+            <li>
+                <strong>Service Separation:</strong>
+                Split scheduling responsibilities from execution responsibilities to improve maintainability and scalability.
+            </li>
+            <li>
+                <strong>Operational Visibility:</strong>
+                Added health endpoints and execution metrics for basic observability.
+            </li>
+            <li>
+                <strong>Developer Experience:</strong>
+                Used Docker Compose to eliminate local environment inconsistencies and simplify project startup.
+            </li>
+        </ul>
+    </section>
+
+    <!-- Future Enhancements -->
+    <section class="section">
+        <h2>Future Enhancements</h2>
+        <ul class="feature-list">
+            <li>Add distributed locking for multi-scheduler coordination.</li>
+            <li>Add message queue support using Kafka or RabbitMQ.</li>
+            <li>Add Prometheus metrics and Grafana dashboards.</li>
+            <li>Add OpenTelemetry distributed tracing.</li>
+            <li>Add scheduled and recurring job support.</li>
+            <li>Add worker autoscaling strategies.</li>
+            <li>Add integration and performance testing suites.</li>
+        </ul>
+    </section>
+
+    <!-- Repository -->
+    <section class="section">
+        <h2>Repository</h2>
+        <p>The full source code is available on GitHub:</p>
+        <p>
+            <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/java/distributed-job-scheduler"
+               target="_blank" rel="noopener" class="repo-link">
+                View the Repository →
+            </a>
+        </p>
+    </section>
+</main>
+
+</body>
+</html>

@@ -133,19 +133,21 @@
         <h2>Overview</h2>
         <p>
             Distributed Job Scheduler is a production-style backend system that enables
-            asynchronous job execution using a scheduler service, worker service,
-            and shared PostgreSQL persistence layer. The project demonstrates
-            common patterns used in distributed systems, including durable job
-            storage, polling-based work acquisition, retry handling, failure recovery,
-            and containerized deployment.
+            asynchronous job execution using a scheduler service, multiple worker services,
+            and a shared PostgreSQL persistence layer. The project demonstrates common
+            patterns used in distributed systems, including distributed worker coordination,
+            durable job storage, polling-based work acquisition, retry handling, failure
+            recovery, and containerized deployment.
         </p>
         <p>
             Jobs are submitted through a REST API and stored in PostgreSQL.
-            The scheduler service manages job scheduling and status updates,
-            while the worker service executes pending jobs and records execution
-            results. The project demonstrates asynchronous job processing,
-            persistent state management, and a microservice-style architecture
-            using Spring Boot, PostgreSQL, and Docker.
+            Multiple worker instances coordinate through PostgreSQL row-level
+            locking and <code>FOR UPDATE SKIP LOCKED</code> to safely claim and
+            execute jobs without duplicate processing. The project demonstrates
+            asynchronous job processing, distributed worker coordination,
+            transactional job ownership, persistent state management, and a
+            microservice-style architecture using Spring Boot, PostgreSQL,
+            and Docker.
         </p>
     </section>
 
@@ -160,14 +162,42 @@
         </p>
 
         <ul class="feature-list">
-            <li><strong>Scheduler Service:</strong> Exposes REST endpoints for job creation and periodically identifies runnable jobs.</li>
-            <li><strong>Worker Service:</strong> Polls available work, executes jobs, and updates execution status.</li>
-            <li><strong>PostgreSQL Persistence:</strong> Stores job definitions, schedules, execution attempts, timestamps, and status transitions.</li>
-            <li><strong>Repository Layer:</strong> Uses Spring Data JPA for persistence and transaction management.</li>
-            <li><strong>Retry Mechanism:</strong> Failed jobs are automatically rescheduled until maximum retry limits are reached.</li>
-            <li><strong>Job State Machine:</strong> Jobs transition through states such as <code>PENDING</code>, <code>RUNNING</code>, <code>SUCCESS</code>, and <code>FAILED</code>.</li>
-            <li><strong>Metrics Tracking:</strong> Basic execution and failure counters provide operational visibility.</li>
-            <li><strong>Containerized Deployment:</strong> Docker and Docker Compose enable repeatable local environments and multi-service orchestration.</li>
+            <li>
+                <strong>Scheduler Service:</strong>
+                Exposes REST endpoints for job creation, status tracking, and job management.
+            </li>
+            <li>
+                <strong>Worker Services:</strong>
+                Multiple worker instances poll for runnable jobs, safely claim work, execute jobs, and update execution status.
+            </li>
+            <li>
+                <strong>Distributed Coordination:</strong>
+                Workers use PostgreSQL row-level locking and <code>FOR UPDATE SKIP LOCKED</code> to prevent duplicate execution and guarantee single-worker ownership.
+            </li>
+            <li>
+                <strong>PostgreSQL Persistence:</strong>
+                Stores job definitions, schedules, execution attempts, timestamps, and status transitions.
+            </li>
+            <li>
+                <strong>Repository Layer:</strong>
+                Uses Spring Data JPA for persistence and transaction management.
+            </li>
+            <li>
+                <strong>Retry Mechanism:</strong>
+                Failed jobs are automatically rescheduled until maximum retry limits are reached.
+            </li>
+            <li>
+                <strong>Job State Machine:</strong>
+                Jobs transition through states such as <code>PENDING</code>, <code>RUNNING</code>, <code>SUCCESS</code>, and <code>FAILED</code>.
+            </li>
+            <li>
+                <strong>Metrics Tracking:</strong>
+                Basic execution and failure counters provide operational visibility.
+            </li>
+            <li>
+                <strong>Containerized Deployment:</strong>
+                Docker and Docker Compose enable repeatable local environments and multi-service orchestration.
+            </li>
         </ul>
     </section>
 
@@ -175,14 +205,46 @@
     <section class="section">
         <h2>Key Features</h2>
         <ul class="feature-list">
-            <li><strong>REST-Based Job Submission:</strong> Create scheduled jobs through a simple HTTP API.</li>
-            <li><strong>Durable Job Storage:</strong> Jobs survive application restarts because state is persisted in PostgreSQL.</li>
-            <li><strong>Asynchronous Processing:</strong> Job execution occurs independently from job submission.</li>
-            <li><strong>Configurable Retry Logic:</strong> Failed jobs can be retried automatically up to configured limits.</li>
-            <li><strong>Status Tracking:</strong> Track job execution progress and final outcomes.</li>
-            <li><strong>Health Checks:</strong> Container health endpoints support operational monitoring.</li>
-            <li><strong>Metrics Collection:</strong> Execution counts and failure counts provide visibility into system behavior.</li>
-            <li><strong>Docker Compose Environment:</strong> Launch the complete stack with a single command.</li>
+            <li>
+                <strong>REST-Based Job Submission:</strong>
+                Create and track jobs through a simple HTTP API.
+            </li>
+            <li>
+                <strong>Durable Job Storage:</strong>
+                Jobs survive application restarts because state is persisted in PostgreSQL.
+            </li>
+            <li>
+                <strong>Distributed Worker Coordination:</strong>
+                Multiple worker instances process jobs concurrently from a shared PostgreSQL-backed queue.
+            </li>
+            <li>
+                <strong>Safe Job Claiming:</strong>
+                PostgreSQL row-level locking and FOR UPDATE SKIP LOCKED prevent duplicate job execution.
+            </li>
+            <li>
+                <strong>Transactional Job Ownership:</strong>
+                Jobs can only be claimed and executed by one worker at a time.
+            </li>
+            <li>
+                <strong>Configurable Retry Logic:</strong>
+                Failed jobs can be retried automatically using exponential backoff.
+            </li>
+            <li>
+                <strong>Status Tracking:</strong>
+                Track job execution progress and final outcomes.
+            </li>
+            <li>
+                <strong>Health Checks:</strong>
+                Container health endpoints support operational monitoring.
+            </li>
+            <li>
+                <strong>Metrics Collection:</strong>
+                Execution counts and failure counts provide visibility into system behavior.
+            </li>
+            <li>
+                <strong>Docker Compose Environment:</strong>
+                Launch the complete stack with a single command.
+            </li>
         </ul>
     </section>
 
@@ -211,7 +273,7 @@
 
         <h3>Services</h3>
         <pre><code>Scheduler Service : http://localhost:8080
-Worker Service    : http://localhost:8081
+Worker Services   : worker-1, worker-2, worker-3
 PostgreSQL        : localhost:5432</code></pre>
     </section>
 
@@ -220,9 +282,10 @@ PostgreSQL        : localhost:5432</code></pre>
         <h2>Engineering Challenges & Solutions</h2>
         <ul class="feature-list">
             <li>
-                <strong>Job Coordination:</strong>
-                Designed database-driven job acquisition logic that ensures workers
-                process eligible jobs while maintaining consistent job state.
+                <strong>Distributed Job Coordination:</strong>
+                Implemented PostgreSQL row-level locking and FOR UPDATE SKIP LOCKED
+                to safely distribute work across multiple worker instances while
+                preventing duplicate execution.
             </li>
             <li>
                 <strong>Fault Tolerance:</strong>
@@ -239,8 +302,8 @@ PostgreSQL        : localhost:5432</code></pre>
                 Created a simple job lifecycle model with clearly defined status transitions.
             </li>
             <li>
-                <strong>Service Separation:</strong>
-                Split scheduling responsibilities from execution responsibilities to improve maintainability and scalability.
+                <strong>Horizontal Scalability:</strong>
+                Designed worker coordination logic that allows additional worker instances to be added without introducing duplicate job execution.
             </li>
             <li>
                 <strong>Operational Visibility:</strong>
@@ -257,13 +320,24 @@ PostgreSQL        : localhost:5432</code></pre>
     <section class="section">
         <h2>Future Enhancements</h2>
         <ul class="feature-list">
-            <li>Add distributed locking for multi-scheduler coordination.</li>
-            <li>Add message queue support using Kafka or RabbitMQ.</li>
-            <li>Add Prometheus metrics and Grafana dashboards.</li>
-            <li>Add OpenTelemetry distributed tracing.</li>
-            <li>Add scheduled and recurring job support.</li>
-            <li>Add worker autoscaling strategies.</li>
-            <li>Add integration and performance testing suites.</li>
+            <li>
+                Add message queue support using Kafka or RabbitMQ.
+            </li>
+            <li>
+                Add Prometheus metrics and Grafana dashboards.
+            </li>
+            <li>
+                Add OpenTelemetry distributed tracing.
+            </li>
+            <li>
+                Add scheduled and recurring job support.
+            </li>
+            <li>
+                Add worker autoscaling strategies.
+            </li>
+            <li>
+                Add integration and performance testing suites.
+            </li>
         </ul>
     </section>
 

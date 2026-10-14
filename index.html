@@ -749,7 +749,7 @@
           </p>
           <p>
             I enjoy designing systems that are observable, testable, and easy for other engineers to work with, whether that's through better APIs, automation, or CI/CD pipelines.
-          </p>          
+          </p>
           <ul class="about-list">
             <li>
               <span class="about-bullet"></span>
@@ -768,16 +768,17 @@
         <div class="about-meta">
           <span class="about-meta-label">Role</span>
           <span class="about-meta-value">Software Engineer - Backend, Systems, Automation</span>
-        
+
           <span class="about-meta-label">Strengths</span>
           <span class="about-meta-value">Reliability, Automation, Distributed Systems, Developer Productivity</span>
-        
+
           <span class="about-meta-label">Languages</span>
           <span class="about-meta-value">Python, Java, Ruby, Bash, PowerShell, Groovy</span>
-        
+
           <span class="about-meta-label">Cloud & Infra</span>
           <span class="about-meta-value">OCI, Terraform (working knowledge), Docker (working knowledge)</span>
         </div>
+      </div>
     </section>
 
     <!-- Skills -->
@@ -869,15 +870,17 @@
           <div>
             <header class="project-header">
               <h3 class="project-name">Distributed Job Scheduler (Java)</h3>
-              <div class="project-meta">Distributed Systems · Background Processing · Reliability</div>
+              <div class="project-meta">Distributed Systems · Worker Coordination · Reliability</div>
             </header>
 
             <p class="project-body">
-              A job scheduling and background processing system built with Spring Boot and PostgreSQL.
-              Features database-backed job persistence, retry handling, scheduling controls, health
-              monitoring, metrics collection, and containerized deployment with Docker Compose.
-              Designed to demonstrate backend engineering and distributed systems concepts such as
-              asynchronous processing, fault tolerance, and reliable job execution.
+              A distributed job scheduling platform built with Spring Boot and PostgreSQL.
+              Features multi-worker processing, PostgreSQL-backed job persistence,
+              transactional job ownership, retry handling with exponential backoff,
+              and distributed worker coordination using FOR UPDATE SKIP LOCKED.
+              Designed to demonstrate backend engineering concepts including
+              concurrency control, fault tolerance, reliable job execution, and
+              containerized deployment with Docker Compose.
             </p>
 
             <div class="project-tags">
@@ -885,8 +888,8 @@
               <span class="project-tag">Spring Boot</span>
               <span class="project-tag">PostgreSQL</span>
               <span class="project-tag">Distributed Systems</span>
+              <span class="project-tag">Worker Coordination</span>
               <span class="project-tag">Docker Compose</span>
-              <span class="project-tag">Background Jobs</span>
             </div>
           </div>
 
@@ -1063,11 +1066,13 @@
             </div>
           </div>
           <div class="project-actions">
-            <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/file_organizer" class="btn-ghost btn-ghost-primary" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/davidfifer/davidfifer-portfolio/tree/main/python/file_organizer"
+               class="btn-ghost btn-ghost-primary" target="_blank" rel="noopener noreferrer">
               <span>View Code</span>
               <span class="btn-icon">↗</span>
             </a>
-            <a href="/projects/python/file_organizer/file-organizer.html" class="btn-ghost btn-ghost-primary"
+            <a href="/projects/python/file_organizer/file-organizer.html"
+               class="btn-ghost btn-ghost-primary">
               <span>Project Details</span>
               <span class="btn-icon">↗</span>
             </a>
